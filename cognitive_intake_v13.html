@@ -1,0 +1,2693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurocognitive Health Intake — Dudley Chiropractic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1a2744; --slate:#2e4068; --teal:#2a7d6e; --teal-light:#3a9d8c;
+  --gold:#c9a84c; --gold-light:#e8c97a; --cream:#f8f5ee; --white:#ffffff;
+  --gray-100:#f4f4f2; --gray-200:#e8e6e0; --gray-400:#9a9690;
+  --gray-600:#5c5a55; --gray-800:#2e2c28; --red-soft:#c0392b;
+  --border:#ddd9d0; --shadow:0 2px 16px rgba(26,39,68,0.08); --radius:10px;
+  --notes-bg:#f9f7f2; --notes-border:#e0d9c8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--gray-800);font-size:16px;line-height:1.6}
+
+/* HEADER */
+.form-header{background:linear-gradient(135deg,var(--navy),var(--slate));color:white;padding:48px 32px 40px;text-align:center;position:relative;overflow:hidden}
+.form-header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(201,168,76,0.12)}
+.form-header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(42,125,110,0.15)}
+.practice-name{display:inline-block;font-weight:600;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:8px;position:relative;z-index:1}
+.form-header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:500;margin-bottom:10px;position:relative;z-index:1}
+.form-header p{font-size:14px;opacity:0.72;max-width:520px;margin:0 auto;position:relative;z-index:1}
+.confidential-tag{display:inline-block;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-top:12px;position:relative;z-index:1}
+
+/* PROGRESS / NAV SLIDER */
+.progress-wrap{background:var(--navy);padding:12px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.nav-top-row{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:820px;margin:0 auto 8px}
+.nav-section-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.45);white-space:nowrap}
+.nav-section-name{font-size:13px;color:rgba(255,255,255,0.9);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.nav-counter{font-size:11px;color:rgba(255,255,255,0.45);white-space:nowrap;flex-shrink:0}
+/* slider row */
+.nav-slider-row{max-width:820px;margin:0 auto;position:relative;padding:8px 0 0}
+.nav-slider-wrap input[type=range]{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--teal-light) var(--pct,0%),rgba(255,255,255,0.15) var(--pct,0%));
+  touch-action:pan-y;
+}
+.nav-slider-wrap input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--gold);border:3px solid white;
+  box-shadow:0 1px 6px rgba(0,0,0,0.4);cursor:pointer;
+  transition:transform .15s;
+}
+.nav-slider-wrap input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
+.nav-slider-wrap input[type=range]::-moz-range-thumb{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--gold);border:3px solid white;cursor:pointer;
+}
+/* tick marks */
+.nav-ticks{display:flex;justify-content:space-between;padding:4px 1px 0;margin-top:2px}
+.nav-tick{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex:1;min-width:0;padding:2px 1px}
+.nav-tick-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background .2s,transform .2s;flex-shrink:0}
+.nav-tick.done .nav-tick-dot{background:var(--teal-light)}
+.nav-tick.active .nav-tick-dot{background:var(--gold);transform:scale(1.4)}
+.nav-tick-num{font-size:10px;color:rgba(255,255,255,0.28);font-weight:600;transition:color .2s;line-height:1.4;text-align:center}
+.nav-tick.done .nav-tick-num{color:rgba(255,255,255,0.45)}
+.nav-tick.active .nav-tick-num{color:var(--gold-light)}
+/* mobile: hide numbers, keep dots; show them at tablet+ */
+@media(max-width:480px){.nav-tick-num{display:none}.nav-tick-dot{width:8px;height:8px}}
+@media print{.progress-wrap{display:none!important}}
+
+/* LAYOUT */
+.form-container{max-width:820px;margin:0 auto;padding:32px 16px 80px}
+.section{display:none;animation:fadeIn .35s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;margin-bottom:20px}
+.section-header{background:linear-gradient(135deg,var(--navy),var(--slate));padding:22px 28px;display:flex;align-items:center;gap:14px}
+.section-num{background:var(--gold);color:var(--navy);font-family:'Playfair Display',serif;font-size:18px;font-weight:600;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-title{color:white;font-family:'Playfair Display',serif;font-size:20px;font-weight:500}
+.section-subtitle{color:rgba(255,255,255,0.6);font-size:13px;margin-top:2px}
+.section-body{padding:28px}
+
+/* CLINICAL NOTE */
+.clinical-note{background:linear-gradient(135deg,#eef6f4,#e8f2f0);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px;font-size:13.5px;color:var(--slate)}
+.clinical-note strong{color:var(--teal)}
+
+/* QUESTIONS */
+.q-block{margin-bottom:28px}
+.q-block:last-child{margin-bottom:0}
+.q-label{font-weight:600;font-size:15px;color:var(--navy);margin-bottom:10px;display:block;line-height:1.4}
+.q-num{display:inline-block;background:var(--teal);color:white;font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;margin-right:8px;vertical-align:middle}
+.q-hint{font-size:13px;color:var(--gray-400);margin-bottom:8px;font-style:italic}
+.q-divider{height:1px;background:var(--gray-200);margin:24px 0}
+.sub-heading{font-family:'Playfair Display',serif;font-size:16px;color:var(--slate);font-weight:500;margin:22px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--gray-200)}
+.sub-heading:first-child{margin-top:0}
+.req{color:var(--red-soft);margin-left:3px}
+
+/* NOTES */
+.notes-field{margin-top:10px}
+.notes-field-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray-400);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.notes-field-label::before{content:'✎';font-size:12px}
+.notes-textarea{width:100%;border:1.5px solid var(--notes-border);border-radius:6px;padding:9px 12px;font-family:'Source Sans 3',sans-serif;font-size:13.5px;color:var(--gray-800);background:var(--notes-bg);resize:vertical;min-height:52px;transition:border-color .2s,background .2s;line-height:1.5}
+.notes-textarea:focus{outline:none;border-color:var(--teal);background:white}
+.notes-textarea::placeholder{color:var(--gray-400);font-style:italic}
+
+/* OPTIONS */
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.options-grid.single-col{grid-template-columns:1fr}
+.options-grid.four-col{grid-template-columns:repeat(4,1fr)}
+@media(max-width:600px){.options-grid,.options-grid.four-col{grid-template-columns:1fr}}
+.opt-item{position:relative}
+.opt-item input[type=radio],.opt-item input[type=checkbox]{position:absolute;opacity:0;width:0;height:0}
+.opt-item label{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--gray-100);border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:14.5px;color:var(--gray-800);transition:all .18s ease;line-height:1.3}
+.opt-item label::before{content:'';width:18px;height:18px;border:2px solid var(--gray-400);border-radius:50%;flex-shrink:0;transition:all .18s ease}
+.opt-item input[type=checkbox]+label::before{border-radius:4px}
+.opt-item input:checked+label{background:#eef7f5;border-color:var(--teal);color:var(--navy);font-weight:500}
+.opt-item input:checked+label::before{background:var(--teal);border-color:var(--teal);box-shadow:inset 0 0 0 3px white}
+.opt-item input[type=checkbox]:checked+label::before{box-shadow:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+
+/* SEVERITY SCALE */
+.severity-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-200);gap:12px;flex-wrap:wrap}
+.severity-row:last-child{border-bottom:none}
+.severity-label{flex:1;font-size:14px;color:var(--gray-800);min-width:200px}
+.severity-opts{display:flex;gap:6px}
+.severity-opts label{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.severity-opts label span{font-size:11px;color:var(--gray-400)}
+.severity-opts input{display:none}
+.severity-opts .dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:var(--gray-100);transition:all .15s;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray-400);font-weight:600}
+.severity-opts input:checked+.dot{border-color:var(--teal);background:var(--teal);color:white}
+
+/* ===== EXPANDABLE DETAIL PANEL (medications, exposures, diagnoses) ===== */
+.expand-panel{display:none;margin-top:8px;margin-bottom:4px;background:#f0f7f5;border:1.5px solid var(--teal);border-radius:8px;padding:14px 16px}
+.expand-panel.open{display:block}
+.expand-panel-label{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.expand-row{display:grid;gap:8px;align-items:center;margin-bottom:8px}
+.expand-row.cols-2{grid-template-columns:1fr 1fr auto}
+.expand-row.cols-3{grid-template-columns:1fr 1fr 1fr auto}
+@media(max-width:520px){.expand-row.cols-2,.expand-row.cols-3{grid-template-columns:1fr}}
+.expand-row input,.expand-row select{border:1.5px solid var(--border);border-radius:6px;padding:8px 10px;font-family:'Source Sans 3',sans-serif;font-size:13.5px;background:white;width:100%}
+.expand-row input:focus,.expand-row select:focus{outline:none;border-color:var(--teal)}
+.expand-row-label{font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;display:block}
+.add-row-btn{background:none;border:1.5px dashed var(--teal);color:var(--teal);font-size:13px;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:background .15s;margin-top:4px}
+.add-row-btn:hover{background:rgba(42,125,110,0.08)}
+.remove-row-btn{background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:18px;padding:0 4px;flex-shrink:0}
+.remove-row-btn:hover{color:var(--red-soft)}
+
+/* ===== TIMELINE-LINKED DATE BADGE ===== */
+.tl-item{margin-bottom:8px}
+.tl-checkbox-row{display:flex;align-items:stretch;gap:0}
+.tl-checkbox-row .opt-item{flex:1}
+/* Date pill — hidden until checked */
+.tl-date-pill{display:none;align-items:center;gap:0;background:#eef7f5;border:2px solid var(--teal);border-left:none;border-radius:0 8px 8px 0;padding:4px 8px 4px 10px;flex-shrink:0;min-width:200px}
+.tl-date-pill.visible{display:flex}
+/* Toggle buttons: Year | Age */
+.tl-toggle{display:flex;gap:0;border:1.5px solid var(--teal);border-radius:5px;overflow:hidden;margin-right:8px;flex-shrink:0}
+.tl-toggle input[type=radio]{position:absolute;opacity:0;width:0;height:0}
+.tl-toggle label{display:block;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);background:white;border-right:1.5px solid var(--teal);transition:all .15s;line-height:1.6;white-space:nowrap}
+.tl-toggle label:last-of-type{border-right:none}
+.tl-toggle input[type=radio]:checked+label{background:var(--teal);color:white}
+/* Shared value input */
+.tl-date-pill .tl-val{width:68px;border:1.5px solid var(--teal);border-radius:5px;padding:4px 6px;font-size:13px;text-align:center;background:white;font-family:'Source Sans 3',sans-serif}
+.tl-date-pill .tl-val:focus{outline:none;border-color:var(--navy)}
+.tl-date-pill .tl-hint{font-size:10px;color:var(--teal);opacity:.7;margin-left:4px;white-space:nowrap;align-self:center}
+/* Checked label: left corners only */
+.tl-checkbox-row .opt-item input:checked+label{border-radius:8px 0 0 8px}
+
+/* ===== FAMILY HISTORY ===== */
+.fam-condition-block{margin-bottom:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.fam-condition-check{display:flex;align-items:center;padding:12px 14px;background:var(--gray-100);gap:12px;cursor:pointer}
+.fam-condition-check input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);flex-shrink:0;cursor:pointer}
+.fam-condition-check span{font-size:14.5px;font-weight:500;color:var(--gray-800)}
+.fam-member-panel{display:none;padding:14px 16px;background:#f7faf9;border-top:1px solid var(--border)}
+.fam-member-panel.open{display:block}
+.fam-member-panel-title{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
+.fam-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fam-tag{background:white;border:1.5px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer;transition:all .15s;color:var(--gray-600);user-select:none}
+.fam-tag.selected{background:#eef7f5;border-color:var(--teal);color:var(--navy);font-weight:600}
+.fam-other-row{display:flex;align-items:center;gap:8px;margin-top:4px}
+.fam-other-row label{font-size:13px;color:var(--gray-600);white-space:nowrap;font-weight:600}
+.fam-other-row input{flex:1;border:1.5px solid var(--border);border-radius:6px;padding:6px 10px;font-family:'Source Sans 3',sans-serif;font-size:13.5px;background:white}
+.fam-other-row input:focus{outline:none;border-color:var(--teal)}
+.fam-age-row{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.fam-age-row label{font-size:12px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px}
+.fam-age-row input{width:80px;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-size:13px;background:white;font-family:'Source Sans 3',sans-serif}
+
+/* TIMELINE */
+.timeline-events{margin-top:16px}
+.tl-event-card{background:var(--gray-100);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;position:relative}
+.tl-event-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:500px){.tl-event-grid{grid-template-columns:1fr}}
+.tl-event-card select,.tl-event-card input[type=text],.tl-event-card input[type=number]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:9px 11px;font-family:'Source Sans 3',sans-serif;font-size:14px;background:white;color:var(--gray-800)}
+.tl-event-card label{font-size:12px;font-weight:600;color:var(--gray-600);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.tl-year-age{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tl-year-age-note{font-size:12px;color:var(--gray-400);font-style:italic;grid-column:1/-1;margin-top:-4px}
+.remove-event-btn{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:18px;padding:2px 6px;border-radius:4px}
+.remove-event-btn:hover{background:#fee;color:var(--red-soft)}
+.add-event-btn{display:flex;align-items:center;gap:8px;background:white;border:2px dashed var(--teal);color:var(--teal);border-radius:8px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;justify-content:center;transition:all .18s;font-family:'Source Sans 3',sans-serif}
+.add-event-btn:hover{background:#eef7f5}
+
+/* TEXT INPUT */
+.text-input{width:100%;border:2px solid var(--border);border-radius:8px;padding:11px 14px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--gray-800);background:var(--gray-100);transition:border-color .2s;resize:vertical}
+.text-input:focus{outline:none;border-color:var(--teal);background:white}
+
+/* INTAKE GRID */
+.intake-info{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:500px){.intake-info{grid-template-columns:1fr}}
+.intake-field label{font-size:12px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
+
+/* NAVIGATION */
+.nav-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px}
+.btn{font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:15px;border:none;border-radius:8px;padding:13px 28px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-prev{background:white;border:2px solid var(--border);color:var(--gray-600)}
+.btn-prev:hover{border-color:var(--slate);color:var(--navy)}
+.btn-next{background:linear-gradient(135deg,var(--teal),var(--teal-light));color:white;box-shadow:0 4px 14px rgba(42,125,110,0.3)}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(42,125,110,0.4)}
+.btn-submit{background:linear-gradient(135deg,var(--navy),var(--slate));color:white;box-shadow:0 4px 14px rgba(26,39,68,0.3)}
+.btn-submit:hover{transform:translateY(-1px)}
+
+/* COMPLETION */
+.completion-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:56px 40px;text-align:center;display:none}
+.completion-card.active{display:block}
+.completion-icon{width:72px;height:72px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:32px;color:white}
+.completion-card h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy);margin-bottom:12px}
+.completion-card p{color:var(--gray-600);font-size:16px;max-width:460px;margin:0 auto 28px}
+
+@media(max-width:600px){.section-body{padding:20px 16px}.form-header{padding:36px 20px 28px}.nav-bar{flex-direction:column}.btn{width:100%;justify-content:center}.btn-prev{order:2}}
+@media print{.nav-bar,.progress-wrap,.section-dots{display:none!important}.section{display:block!important}.form-container{padding:0}}
+</style>
+</head>
+<body>
+
+<div class="form-header">
+  <div class="practice-name">Dudley Chiropractic, Acupuncture and Functional Medicine</div>
+  <h1>Neurocognitive Health Assessment</h1>
+  <p>This form helps us understand the full picture of your health history. Please answer as specifically as possible — there are no right or wrong answers.</p>
+  <div class="confidential-tag">Confidential Patient Health Record</div>
+</div>
+
+<div class="progress-wrap">
+  <div class="nav-top-row">
+    <div>
+      <div class="nav-section-label">Section</div>
+      <div class="nav-section-name" id="navSectionName">Patient Information</div>
+    </div>
+    <div class="nav-counter" id="navCounter">1 of 13</div>
+  </div>
+  <div class="nav-slider-row">
+    <div class="nav-slider-wrap">
+      <input type="range" id="sectionSlider" min="1" max="13" value="1"
+        oninput="sliderNavigate(this.value)"
+        onchange="sliderNavigate(this.value)">
+      <div class="nav-ticks" id="navTicks"></div>
+    </div>
+  </div>
+</div>
+
+<div class="form-container">
+
+<!-- ===================== SECTION 1: PATIENT INFO ===================== -->
+<div class="section active" id="sec-1">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div><div class="section-title">Patient Information</div><div class="section-subtitle">Basic identifiers and reason for visit</div></div>
+    </div>
+    <div class="section-body">
+      <div class="intake-info">
+        <div class="intake-field"><label>First Name <span class="req">*</span></label><input class="text-input" type="text" placeholder="First name"></div>
+        <div class="intake-field"><label>Last Name <span class="req">*</span></label><input class="text-input" type="text" placeholder="Last name"></div>
+        <div class="intake-field"><label>Date of Birth <span class="req">*</span></label><input class="text-input" type="date" id="dob"></div>
+        <div class="intake-field"><label>Today's Date</label><input class="text-input" type="date" id="today"></div>
+        <div class="intake-field"><label>Birth Sex</label>
+          <select class="text-input"><option value="">— Select —</option><option>Male</option><option>Female</option></select>
+        </div>
+        <div class="intake-field"><label>Who is completing this form?</label>
+          <select class="text-input"><option value="">— Select —</option><option>Patient (self)</option><option>Family member / caregiver</option><option>Both together</option></select>
+        </div>
+        <div class="intake-field"><label>Phone Number <span class="req">*</span></label><input class="text-input" type="tel" placeholder="(___) ___-____"></div>
+        <div class="intake-field"><label>Email Address</label><input class="text-input" type="email" placeholder="email@example.com"></div>
+      </div>
+
+      <div class="intake-info" style="margin-top:0">
+        <div class="intake-field" style="grid-column:1/-1">
+          <label>Home Address <span class="req">*</span></label>
+          <input class="text-input" type="text" placeholder="Street address, City, State, ZIP">
+        </div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin:20px 0 10px">Emergency Contact</div>
+      <div class="intake-info" style="margin-bottom:24px">
+        <div class="intake-field"><label>Emergency Contact Name</label><input class="text-input" type="text" placeholder="Full name"></div>
+        <div class="intake-field"><label>Relationship to Patient</label><input class="text-input" type="text" placeholder="e.g. Spouse, Daughter, Son"></div>
+        <div class="intake-field"><label>Emergency Contact Phone</label><input class="text-input" type="tel" placeholder="(___) ___-____"></div>
+        <div class="intake-field"><label>Emergency Contact Email</label><input class="text-input" type="email" placeholder="email@example.com"></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label">What is the main reason for today's consultation? (Check all that apply) <span class="req">*</span></span>
+        <div class="q-hint">Select everything that applies — there is no wrong answer and no single "correct" concern to have.</div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin:12px 0 8px">Thinking, memory, and mood</div>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="checkbox" id="c1"><label for="c1">Memory decline or forgetfulness — forgetting recent events, appointments, or conversations</label></div>
+          <div class="opt-item"><input type="checkbox" id="c2"><label for="c2">Difficulty concentrating, thinking clearly, or following through on tasks</label></div>
+          <div class="opt-item"><input type="checkbox" id="c3"><label for="c3">Trouble finding the right word during conversation</label></div>
+          <div class="opt-item"><input type="checkbox" id="c4"><label for="c4">Confusion, disorientation, or getting lost in familiar places</label></div>
+          <div class="opt-item"><input type="checkbox" id="c5"><label for="c5">Personality changes, increased irritability, or reduced motivation</label></div>
+          <div class="opt-item"><input type="checkbox" id="c6"><label for="c6">Depression, anxiety, or mood changes that feel different from before</label></div>
+          <div class="opt-item"><input type="checkbox" id="c17"><label for="c17">Seeing things that others do not see</label></div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 8px">Movement, balance, and physical changes</div>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="checkbox" id="c8"><label for="c8">Shaking, trembling, or tremor in a hand, arm, or leg</label></div>
+          <div class="opt-item"><input type="checkbox" id="c9"><label for="c9">Stiffness or rigidity in the arms, legs, or neck</label></div>
+          <div class="opt-item"><input type="checkbox" id="c10"><label for="c10">Feeling slower — taking longer to get started, turn around, or walk</label></div>
+          <div class="opt-item"><input type="checkbox" id="c11"><label for="c11">Changes in gait — shorter steps, shuffling, or reduced arm swing while walking</label></div>
+          <div class="opt-item"><input type="checkbox" id="c12"><label for="c12">Balance problems, unsteadiness, or unexpected falls</label></div>
+          <div class="opt-item"><input type="checkbox" id="c13"><label for="c13">Handwriting has become smaller or harder to read</label></div>
+          <div class="opt-item"><input type="checkbox" id="c14"><label for="c14">Voice has become softer, quieter, or more monotone</label></div>
+          <div class="opt-item"><input type="checkbox" id="c15"><label for="c15">Reduced sense of smell or taste</label></div>
+          <div class="opt-item"><input type="checkbox" id="c16"><label for="c16">Dizziness or lightheadedness when standing up</label></div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 8px">Other reasons</div>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="checkbox" id="c18"><label for="c18">A concerned family member or friend prompted this visit</label></div>
+          <div class="opt-item"><input type="checkbox" id="c19"><label for="c19">Proactive screening — no specific symptoms yet, but family history or personal concern</label></div>
+          <div class="opt-item"><input type="checkbox" id="c20"><label for="c20">Follow-up or ongoing monitoring from a previous visit</label></div>
+        </div>
+
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Describe your main concern in your own words — when did it start, what prompted you to come in today?"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 2: COGNITIVE SYMPTOMS ===================== -->
+<div class="section" id="sec-2">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div><div class="section-title">Symptoms — Thinking & Memory</div><div class="section-subtitle">Memory, language, orientation, concentration, and mood</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>This section focuses on thinking and memory changes.</strong> If your main concern is physical — movement, balance, tremor, or coordination — those are covered in Section 13. Answer every question that applies to you; select "Never" for items that are not relevant.</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>When did you first notice any of the changes you described on the previous page?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="onset" id="o1"><label for="o1">Less than 6 months ago</label></div>
+          <div class="opt-item"><input type="radio" name="onset" id="o2"><label for="o2">6–12 months ago</label></div>
+          <div class="opt-item"><input type="radio" name="onset" id="o3"><label for="o3">1–3 years ago</label></div>
+          <div class="opt-item"><input type="radio" name="onset" id="o4"><label for="o4">More than 3 years ago</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Approximate date, or what first made you or someone else notice the change..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Since first noticed, your symptoms or changes have been:</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="prog" id="p1"><label for="p1">Stable / unchanged</label></div>
+          <div class="opt-item"><input type="radio" name="prog" id="p2"><label for="p2">Slowly getting worse</label></div>
+          <div class="opt-item"><input type="radio" name="prog" id="p3"><label for="p3">Rapidly getting worse</label></div>
+          <div class="opt-item"><input type="radio" name="prog" id="p4"><label for="p4">Fluctuating — good days and bad days</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Describe the pattern of change, or what makes it better or worse..."></textarea></div>
+      </div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">Memory — how often does each occur?</div>
+      <div class="clinical-note"><strong>Instructions:</strong> 0 = Never &nbsp;|&nbsp; 1 = Occasionally &nbsp;|&nbsp; 2 = Weekly &nbsp;|&nbsp; 3 = Daily</div>
+      <div id="memScale"></div>
+      <div class="notes-field" style="margin-top:14px"><div class="notes-field-label">Notes — Memory</div><textarea class="notes-textarea" placeholder="Any additional details about memory symptoms..."></textarea></div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">Language and Communication</div>
+      <div id="langScale"></div>
+      <div class="notes-field" style="margin-top:14px"><div class="notes-field-label">Notes — Language</div><textarea class="notes-textarea" placeholder="Word-finding or communication difficulties..."></textarea></div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">Orientation and Navigation</div>
+      <div id="orientScale"></div>
+      <div class="notes-field" style="margin-top:14px"><div class="notes-field-label">Notes — Orientation</div><textarea class="notes-textarea" placeholder="Disorientation or navigation difficulties..."></textarea></div>
+      <div class="q-divider"></div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Are symptoms noticeably worse at a particular time of day?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="tod1"><label for="tod1">Morning</label></div>
+          <div class="opt-item"><input type="checkbox" id="tod2"><label for="tod2">Afternoon</label></div>
+          <div class="opt-item"><input type="checkbox" id="tod3"><label for="tod3">Evening</label></div>
+          <div class="opt-item"><input type="checkbox" id="tod4"><label for="tod4">No clear pattern</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Describe any time-of-day patterns..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>Within a single day, do your thinking or alertness levels shift dramatically — for example, being clearheaded and conversational in the morning but confused, drowsy, or hard to reach by afternoon, then better again by evening?</span>
+        <div class="q-hint">This is different from having good days and bad days overall. This question is about sharp changes in mental clarity <em>within the same day</em>, sometimes within hours.</div>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="radio" name="lewyflux" id="lf0"><label for="lf0">No — thinking and alertness are fairly consistent throughout the day</label></div>
+          <div class="opt-item"><input type="radio" name="lewyflux" id="lf1"><label for="lf1">Occasionally — some within-day variation but mild</label></div>
+          <div class="opt-item"><input type="radio" name="lewyflux" id="lf2"><label for="lf2">Yes — noticeable shifts in clarity or alertness within the same day</label></div>
+          <div class="opt-item"><input type="radio" name="lewyflux" id="lf3"><label for="lf3">Yes — dramatic swings, almost like a different person at different times of day</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Describe what this looks like — what time of day, how long the unclear periods last, what triggers or relieves it..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">5</span>Have family members or friends noticed changes in your memory, thinking, movement, or behavior that you yourself may not have noticed?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="famnotice" id="fn1"><label for="fn1">No</label></div>
+          <div class="opt-item"><input type="radio" name="famnotice" id="fn2"><label for="fn2">Yes — occasionally</label></div>
+          <div class="opt-item"><input type="radio" name="famnotice" id="fn3"><label for="fn3">Yes — frequently</label></div>
+          <div class="opt-item"><input type="radio" name="famnotice" id="fn4"><label for="fn4">Unknown / no close contacts</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="What specifically have others noticed or commented on?"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 3: FUNCTIONAL IMPACT ===================== -->
+<div class="section" id="sec-3">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div><div class="section-title">Daily Function & Independence</div><div class="section-subtitle">How symptoms of any kind affect everyday activities</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>Instructions:</strong> Rate your current level of independence for each activity — whether difficulty is due to memory, thinking, movement, tremor, stiffness, balance, or any other reason. 0 = Fully independent &nbsp;|&nbsp; 1 = Need some help &nbsp;|&nbsp; 2 = Need regular help &nbsp;|&nbsp; 3 = No longer able to do</div>
+      <div id="funcScale"></div>
+      <div class="notes-field" style="margin-top:14px"><div class="notes-field-label">Notes — Daily Function</div><textarea class="notes-textarea" placeholder="Describe specific difficulties and what is causing them..."></textarea></div>
+      <div class="q-divider"></div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Have you stopped doing activities you previously enjoyed because of any health-related change — whether memory, thinking, movement, balance, fatigue, or something else?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="stopped" id="st1"><label for="st1">No</label></div>
+          <div class="opt-item"><input type="radio" name="stopped" id="st2"><label for="st2">Yes — a few activities</label></div>
+          <div class="opt-item"><input type="radio" name="stopped" id="st3"><label for="st3">Yes — many activities</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Which activities? When did you stop? What is preventing you?"></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Have there been any safety concerns at home or while out — such as leaving the stove on, getting lost while driving, missed medications, falls, or difficulty handling tasks safely?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="safety" id="sf1"><label for="sf1">No safety concerns</label></div>
+          <div class="opt-item"><input type="radio" name="safety" id="sf2"><label for="sf2">Minor / occasional</label></div>
+          <div class="opt-item"><input type="radio" name="safety" id="sf3"><label for="sf3">Yes — moderate concern</label></div>
+          <div class="opt-item"><input type="radio" name="safety" id="sf4"><label for="sf4">Yes — serious concern</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Describe specific incidents — what happened and how often?"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 4: SLEEP ===================== -->
+<div class="section" id="sec-4">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div><div class="section-title">Sleep Physiology</div><div class="section-subtitle">Sleep architecture, apnea risk, and restorative quality</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>Why this matters:</strong> Sleep is when the brain's glymphatic system clears amyloid and tau proteins. Disrupted sleep is one of the most modifiable risk factors in cognitive decline.</div>
+      <div id="sleepQs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 5: METABOLIC ===================== -->
+<div class="section" id="sec-5">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div><div class="section-title">Metabolic Health & Food Patterns</div><div class="section-subtitle">Glucose regulation — objective behavioral measures</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>Instructions:</strong> Answer based on actual quantities and behaviors — not your opinion of whether your diet is healthy.</div>
+      <div id="metaQs"></div>
+
+      <div class="q-divider"></div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">10</span>Have you ever been diagnosed with any of the following?</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Date fields appear when you check an item</strong> — enter the approximate year or your age at diagnosis. This links directly to your health timeline.</div>
+        <div id="metaDxList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Lab values if known, current treatment..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 6: GUT ===================== -->
+<div class="section" id="sec-6">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div><div class="section-title">Gut & Digestive Function</div><div class="section-subtitle">Microbiome, motility, and gut-brain axis</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>Why this matters:</strong> The gut-brain axis is a direct communication pathway. Constipation, gut infections, and intestinal permeability are upstream drivers of neuroinflammation.</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>How many complete bowel movements do you have per week?</span>
+        <div class="q-hint">A "complete" movement means you feel fully emptied afterward.</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="bm" id="bm1"><label for="bm1">Fewer than 3 per week</label></div>
+          <div class="opt-item"><input type="radio" name="bm" id="bm2"><label for="bm2">3–5 per week</label></div>
+          <div class="opt-item"><input type="radio" name="bm" id="bm3"><label for="bm3">Once daily</label></div>
+          <div class="opt-item"><input type="radio" name="bm" id="bm4"><label for="bm4">More than once daily</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Consistency, effort required, changes from usual..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Past 6 months — check any symptoms that apply</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="gs1"><label for="gs1">Constipation (straining, hard stools)</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs2"><label for="gs2">Loose stools or diarrhea</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs3"><label for="gs3">Bloating or distension after meals</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs4"><label for="gs4">Excessive gas</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs5"><label for="gs5">Heartburn or acid reflux</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs6"><label for="gs6">Abdominal pain or cramping</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs7"><label for="gs7">Noticeable reactions to specific foods</label></div>
+          <div class="opt-item"><input type="checkbox" id="gs8"><label for="gs8">None of these</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Which foods trigger symptoms? Duration? Pattern?"></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>History of gut-related conditions or treatments</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Check any that apply.</strong> Detail fields appear for each condition — including treatment status and whether still ongoing.</div>
+        <div id="gutHxList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Dates, treatments tried, current status..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 7: TOXINS ===================== -->
+<div class="section" id="sec-7">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div><div class="section-title">Toxin & Environmental Exposure</div><div class="section-subtitle">Mold, metals, pesticides, solvents, and occupational history</div></div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note"><strong>Note:</strong> Environmental toxins are among the most underdiagnosed contributors to cognitive decline and Parkinson's disease. Please answer all items, including past exposures.</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Have you ever lived or worked in a building with visible mold, water stains, active leaks, or a persistent musty odor?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="mold" id="mo1"><label for="mo1">No</label></div>
+          <div class="opt-item"><input type="radio" name="mold" id="mo2"><label for="mo2">Yes — brief or mild exposure</label></div>
+          <div class="opt-item"><input type="radio" name="mold" id="mo3"><label for="mo3">Yes — prolonged (months or years)</label></div>
+          <div class="opt-item"><input type="radio" name="mold" id="mo4"><label for="mo4">Currently in such a building</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Location, duration, any remediation done..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Did you develop unusual symptoms — fatigue, brain fog, rashes, breathing problems — specifically after moving into a building or after water damage?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="moldreact" id="mr1"><label for="mr1">No</label></div>
+          <div class="opt-item"><input type="radio" name="moldreact" id="mr2"><label for="mr2">Yes — never connected it to the building</label></div>
+          <div class="opt-item"><input type="radio" name="moldreact" id="mr3"><label for="mr3">Yes — symptoms improved when I left</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Symptoms and timeline..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Primary source of drinking water</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="water" id="wt1"><label for="wt1">Municipal / city water</label></div>
+          <div class="opt-item"><input type="radio" name="water" id="wt2"><label for="wt2">Well water</label></div>
+          <div class="opt-item"><input type="radio" name="water" id="wt3"><label for="wt3">Filtered water (whole-house or pitcher)</label></div>
+          <div class="opt-item"><input type="radio" name="water" id="wt4"><label for="wt4">Bottled water</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Type of filter, well location, etc."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>Occupational or home exposure to hazardous substances</span>
+        <div class="q-hint">Check any that apply — then list the specific substance(s), your job or setting, and duration of exposure in the fields that appear.</div>
+        <div id="toxExpList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Any additional exposure history not listed above..."></textarea></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 8: INFECTIONS ===================== -->
+<div class="section" id="sec-8">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div><div class="section-title">Infections & Immune Activation</div><div class="section-subtitle">Chronic infections, immune dysregulation, autoimmune history</div></div>
+    </div>
+    <div class="section-body">
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Have you ever been diagnosed with or treated for any of the following?</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Check any that apply.</strong> A date pill and condition-specific detail fields will appear — enter what you remember. Approximate dates are fine.</div>
+        <div id="infectList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Dates, treatments, ongoing vs resolved..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Do you have a history of autoimmune disease?</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Check any that apply.</strong> Detail fields appear for each — including current medications and disease status.</div>
+        <div id="autoimList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Dates diagnosed, current medications, disease activity..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 9: HORMONAL ===================== -->
+<div class="section" id="sec-9">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div><div class="section-title">Hormonal & Trophic Factors</div><div class="section-subtitle">Hormones that directly support brain metabolism and synaptic maintenance</div></div>
+    </div>
+    <div class="section-body">
+      <div class="sub-heading">For Women</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Current menopausal status</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="meno" id="me1"><label for="me1">Pre-menopausal (periods regular)</label></div>
+          <div class="opt-item"><input type="radio" name="meno" id="me2"><label for="me2">Peri-menopausal (irregular)</label></div>
+          <div class="opt-item"><input type="radio" name="meno" id="me3"><label for="me3">Post-menopausal</label></div>
+          <div class="opt-item"><input type="radio" name="meno" id="me4"><label for="me4">N/A</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Age at menopause, symptoms..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>History of surgical menopause?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="surgical" id="su1"><label for="su1">No</label></div>
+          <div class="opt-item"><input type="radio" name="surgical" id="su2"><label for="su2">Hysterectomy (ovaries kept)</label></div>
+          <div class="opt-item"><input type="radio" name="surgical" id="su3"><label for="su3">Full hysterectomy (ovaries removed)</label></div>
+          <div class="opt-item"><input type="radio" name="surgical" id="su4"><label for="su4">N/A</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Age at surgery, reason..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Currently using hormone replacement therapy (HRT)?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="hrt" id="hrt1"><label for="hrt1">No</label></div>
+          <div class="opt-item"><input type="radio" name="hrt" id="hrt2"><label for="hrt2">Yes — bioidentical</label></div>
+          <div class="opt-item"><input type="radio" name="hrt" id="hrt3"><label for="hrt3">Yes — conventional HRT</label></div>
+          <div class="opt-item"><input type="radio" name="hrt" id="hrt4"><label for="hrt4">N/A</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Specific hormones, doses, duration..."></textarea></div>
+      </div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">For Men</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>Past 2 years — have you noticed any of the following? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="lt1"><label for="lt1">Noticeably reduced sex drive</label></div>
+          <div class="opt-item"><input type="checkbox" id="lt2"><label for="lt2">Loss of muscle mass despite normal activity</label></div>
+          <div class="opt-item"><input type="checkbox" id="lt3"><label for="lt3">Increased abdominal fat</label></div>
+          <div class="opt-item"><input type="checkbox" id="lt4"><label for="lt4">Depression, irritability, or low motivation</label></div>
+          <div class="opt-item"><input type="checkbox" id="lt5"><label for="lt5">N/A</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Testosterone testing history, TRT if applicable..."></textarea></div>
+      </div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">All Patients — Thyroid & Trophic Signs</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">5</span>Have you been diagnosed with a thyroid condition?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="thyroid" id="thy1" onchange="handleThyroid(false)"><label for="thy1">No</label></div>
+          <div class="opt-item"><input type="radio" name="thyroid" id="thy2" onchange="handleThyroid(true)"><label for="thy2">Hypothyroidism (underactive)</label></div>
+          <div class="opt-item"><input type="radio" name="thyroid" id="thy3" onchange="handleThyroid(true)"><label for="thy3">Hashimoto's thyroiditis</label></div>
+          <div class="opt-item"><input type="radio" name="thyroid" id="thy4" onchange="handleThyroid(true)"><label for="thy4">Hyperthyroidism / Graves'</label></div>
+          <div class="opt-item"><input type="radio" name="thyroid" id="thy5" onchange="handleThyroid(false)"><label for="thy5">Unsure / not tested</label></div>
+        </div>
+        <div id="thyroidDetail"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Duration of condition, symptoms, recent labs..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">6</span>Do you experience any of the following? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="tr1"><label for="tr1">Persistent fatigue not explained by poor sleep</label></div>
+          <div class="opt-item"><input type="checkbox" id="tr2"><label for="tr2">Cold intolerance (always cold when others are comfortable)</label></div>
+          <div class="opt-item"><input type="checkbox" id="tr3"><label for="tr3">Hair thinning or hair loss</label></div>
+          <div class="opt-item"><input type="checkbox" id="tr4"><label for="tr4">Low motivation / apathy</label></div>
+          <div class="opt-item"><input type="checkbox" id="tr5"><label for="tr5">None of these</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Onset, severity, patterns..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 10: VASCULAR / NEURO ===================== -->
+<div class="section" id="sec-10">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div><div class="section-title">Vascular, Cardiac & Neurologic Injury</div><div class="section-subtitle">Perfusion risk, head trauma, cardiovascular history</div></div>
+    </div>
+    <div class="section-body">
+      <div class="sub-heading">Vascular & Cardiac Risk</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Have you been diagnosed with any of the following?</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Check any that apply.</strong> Detail fields appear for each — including medications and current status.</div>
+        <div id="vascDxList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Medications, blood pressure readings, dates of events..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Tobacco use history</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="smoke" id="sk1"><label for="sk1">Never</label></div>
+          <div class="opt-item"><input type="radio" name="smoke" id="sk2"><label for="sk2">Former — quit more than 5 years ago</label></div>
+          <div class="opt-item"><input type="radio" name="smoke" id="sk3"><label for="sk3">Former — quit within last 5 years</label></div>
+          <div class="opt-item"><input type="radio" name="smoke" id="sk4"><label for="sk4">Current smoker</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Pack-years, type of tobacco, quit attempts..."></textarea></div>
+      </div>
+      <div class="q-divider"></div>
+      <div class="sub-heading">Neurologic Injury</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Head injuries — describe each one that caused headache, confusion, blackout, or memory gap</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Add one card per injury.</strong> If you have never had a head injury, leave this section empty and check "No head injuries" below.</div>
+        <div id="headInjuryCards"></div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px">
+          <button type="button" class="add-event-btn" style="flex:1;min-width:200px" onclick="addHeadInjuryCard()">+ Add a head injury</button>
+          <div class="opt-item" style="flex-shrink:0">
+            <input type="checkbox" id="hi_none"><label for="hi_none">No head injuries</label>
+          </div>
+        </div>
+        <div class="notes-field" style="margin-top:10px"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Any additional context about head injuries..."></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>History of contact sports or high-impact activities? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="sp1"><label for="sp1">Football</label></div>
+          <div class="opt-item"><input type="checkbox" id="sp2"><label for="sp2">Boxing or martial arts</label></div>
+          <div class="opt-item"><input type="checkbox" id="sp3"><label for="sp3">Soccer (heading)</label></div>
+          <div class="opt-item"><input type="checkbox" id="sp4"><label for="sp4">Hockey</label></div>
+          <div class="opt-item"><input type="checkbox" id="sp5"><label for="sp5">Military — blast exposure</label></div>
+          <div class="opt-item"><input type="checkbox" id="sp6"><label for="sp6">None</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Level of play, years of participation..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 11: STRESS / MEDS ===================== -->
+<div class="section" id="sec-11">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div><div class="section-title">Stress, Mental Health & Medications</div><div class="section-subtitle">Psychosocial load and drugs known to affect cognition or movement</div></div>
+    </div>
+    <div class="section-body">
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Past 12 months — how often have you experienced significant stress from work, caregiving, finances, or family?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="stress" id="str1"><label for="str1">Rarely</label></div>
+          <div class="opt-item"><input type="radio" name="stress" id="str2"><label for="str2">Occasionally (few times per month)</label></div>
+          <div class="opt-item"><input type="radio" name="stress" id="str3"><label for="str3">Frequently (multiple times per week)</label></div>
+          <div class="opt-item"><input type="radio" name="stress" id="str4"><label for="str4">Daily — chronic ongoing stress</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Primary sources of stress, how long ongoing..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Significant psychological or traumatic events with lasting effects?</span>
+        <div class="clinical-note" style="margin-bottom:12px"><strong>Date fields appear when you check an item</strong> — enter approximate year or age at onset.</div>
+        <div id="psychList"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Any context you wish to share..."></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Medications That Can Affect Cognition or Movement</div>
+      <div class="clinical-note"><strong>Important:</strong> The medication classes below are frequently overlooked contributors to both memory problems and movement symptoms. Some block dopamine directly and can cause or worsen tremor, stiffness, and slowed movement — even in people who do not have Parkinson's disease. Check each that applies, then list the specific medications in the fields that appear.</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Are you currently taking — or have you taken in the past — any of the following?</span>
+        <div id="cogMedsList"></div>
+        <div style="margin-top:10px">
+          <div class="clinical-note" style="margin-bottom:8px"><strong>Also important — dopamine-blocking medications:</strong> The drugs below can cause Parkinson-like symptoms (tremor, stiffness, slowness) even in people without Parkinson's disease. This is called drug-induced parkinsonism and is one of the most commonly missed diagnoses.</div>
+          <div class="opt-item" style="margin-bottom:6px" id="dopBlockCheckWrap">
+            <input type="checkbox" id="cm_dop" onchange="togglePanel('panel_cm_dop', this.checked)">
+            <label for="cm_dop">Dopamine-blocking medications — antipsychotics, some anti-nausea drugs, or certain older antidepressants (Haldol, Risperdal, Zyprexa, Seroquel, Reglan / metoclopramide, Compazine / prochlorperazine, etc.)</label>
+          </div>
+          <div class="expand-panel" id="panel_cm_dop">
+            <div class="expand-panel-label">List the dopamine-blocking medication(s)</div>
+            <div id="list_cm_dop">
+              <div class="expand-row cols-2">
+                <div><span class="expand-row-label">Medication name</span><input type="text" placeholder="e.g. Reglan, Risperdal, Haldol" name="dop_name_1"></div>
+                <div><span class="expand-row-label">Duration taken</span><input type="text" placeholder="e.g. 6 months in 2019, still taking" name="dop_dur_1"></div>
+                <button type="button" class="remove-row-btn" style="display:none">×</button>
+              </div>
+            </div>
+            <button type="button" class="add-row-btn" onclick="addMedRow('list_cm_dop','cm_dop')" style="margin-top:6px">+ Add another</button>
+          </div>
+        </div>
+        <div class="opt-item" style="margin-top:10px"><input type="checkbox" id="cm_none"><label for="cm_none">None of these</label></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>All other current prescription medications</span>
+        <div class="q-hint">Include blood pressure, diabetes, thyroid, and any prescriptions not listed above</div>
+        <div id="rxList"></div>
+        <button type="button" class="add-row-btn" onclick="addGenericMed('rxList','rx')" style="margin-top:6px">+ Add medication</button>
+        <div class="notes-field" style="margin-top:10px"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="How long on each, side effects noticed, recently started or stopped..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">5</span>All current supplements and vitamins</span>
+        <div id="suppList"></div>
+        <button type="button" class="add-row-btn" onclick="addGenericMed('suppList','supp')" style="margin-top:6px">+ Add supplement</button>
+        <div class="notes-field" style="margin-top:10px"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Recently started or stopped, any reactions noticed..."></textarea></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 12: LIFESTYLE / FAMILY / TIMELINE ===================== -->
+<div class="section" id="sec-12">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <div><div class="section-title">Lifestyle, Family History & Health Timeline</div><div class="section-subtitle">Exercise, cognitive engagement, genetics, and your chronological health story</div></div>
+    </div>
+    <div class="section-body">
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>On average, how many days per week do you do any form of intentional physical exercise lasting at least 20 continuous minutes?</span>
+        <div class="options-grid four-col">
+          <div class="opt-item"><input type="radio" name="exdays" id="ex0"><label for="ex0">0 days</label></div>
+          <div class="opt-item"><input type="radio" name="exdays" id="ex1"><label for="ex1">1–2 days</label></div>
+          <div class="opt-item"><input type="radio" name="exdays" id="ex2"><label for="ex2">3–4 days</label></div>
+          <div class="opt-item"><input type="radio" name="exdays" id="ex3"><label for="ex3">5+ days</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Any physical limitations, injuries, or reasons for inactivity..."></textarea></div>
+      </div>
+
+      <div class="sub-heading">Cardiovascular / aerobic exercise</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>How many days per week do you do aerobic or cardiovascular exercise that raises your heart rate noticeably?</span>
+        <div class="q-hint">Examples: brisk walking, running, cycling, swimming, rowing, dancing, aerobics classes, pickleball, hiking</div>
+        <div class="options-grid four-col">
+          <div class="opt-item"><input type="radio" name="cardio" id="cd0"><label for="cd0">0 days</label></div>
+          <div class="opt-item"><input type="radio" name="cardio" id="cd1"><label for="cd1">1–2 days</label></div>
+          <div class="opt-item"><input type="radio" name="cardio" id="cd2"><label for="cd2">3–4 days</label></div>
+          <div class="opt-item"><input type="radio" name="cardio" id="cd3"><label for="cd3">5+ days</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Type of cardio, approximate duration per session, intensity (easy / moderate / hard)..."></textarea></div>
+      </div>
+
+      <div class="sub-heading">Resistance / strength training</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>How many days per week do you do strength or resistance training?</span>
+        <div class="q-hint">Examples: weight machines, free weights, dumbbells, kettlebells, resistance bands, bodyweight exercises (push-ups, squats), TRX</div>
+        <div class="options-grid four-col">
+          <div class="opt-item"><input type="radio" name="strength" id="st0"><label for="st0">0 days</label></div>
+          <div class="opt-item"><input type="radio" name="strength" id="st1"><label for="st1">1–2 days</label></div>
+          <div class="opt-item"><input type="radio" name="strength" id="st2"><label for="st2">3–4 days</label></div>
+          <div class="opt-item"><input type="radio" name="strength" id="st3"><label for="st3">5+ days</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Type of training, approximate sets / duration per session..."></textarea></div>
+      </div>
+
+      <div class="sub-heading">Mind-body, balance, and flexibility</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>How many days per week do you engage in mind-body, balance, or flexibility practices?</span>
+        <div class="q-hint">Examples: yoga, tai chi, qigong, Pilates, stretching routines, balance training, meditation combined with movement</div>
+        <div class="options-grid four-col">
+          <div class="opt-item"><input type="radio" name="mindbody" id="mb0"><label for="mb0">0 days</label></div>
+          <div class="opt-item"><input type="radio" name="mindbody" id="mb1"><label for="mb1">1–2 days</label></div>
+          <div class="opt-item"><input type="radio" name="mindbody" id="mb2"><label for="mb2">3–4 days</label></div>
+          <div class="opt-item"><input type="radio" name="mindbody" id="mb3"><label for="mb3">5+ days</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Type of practice, duration, instructor-led vs self-directed..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">5</span>Has your overall physical activity level changed in the past 2 years?</span>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="radio" name="actchange" id="ac1"><label for="ac1">About the same as before</label></div>
+          <div class="opt-item"><input type="radio" name="actchange" id="ac2"><label for="ac2">More active than before</label></div>
+          <div class="opt-item"><input type="radio" name="actchange" id="ac3"><label for="ac3">Less active — by choice</label></div>
+          <div class="opt-item"><input type="radio" name="actchange" id="ac4"><label for="ac4">Less active — due to pain, injury, or health issue</label></div>
+          <div class="opt-item"><input type="radio" name="actchange" id="ac5"><label for="ac5">Less active — due to fatigue or low motivation</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="What changed? Any specific barrier to exercise?"></textarea></div>
+      </div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">6</span>How do you primarily engage your mind on a typical week? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="ca1"><label for="ca1">Reading books or long articles</label></div>
+          <div class="opt-item"><input type="checkbox" id="ca2"><label for="ca2">Puzzles / word games</label></div>
+          <div class="opt-item"><input type="checkbox" id="ca3"><label for="ca3">Learning a new skill or language</label></div>
+          <div class="opt-item"><input type="checkbox" id="ca4"><label for="ca4">Regular social engagement</label></div>
+          <div class="opt-item"><input type="checkbox" id="ca5"><label for="ca5">Music (playing or learning)</label></div>
+          <div class="opt-item"><input type="checkbox" id="ca6"><label for="ca6">Primarily passive (TV, scrolling)</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Hours per week of stimulating vs passive activity..."></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Family History</div>
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">7</span>Check any condition present in your family — then select which relatives were affected and enter age of diagnosis if known.</span>
+        <div id="famHxContainer"></div>
+        <div class="notes-field" style="margin-top:14px"><div class="notes-field-label">Notes — Family History</div><textarea class="notes-textarea" placeholder="Cause of death if relevant, certainty of diagnosis..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">8</span>If any relatives had Alzheimer's disease or dementia, did onset occur before age 65?</span>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="radio" name="earlyad" id="ea1"><label for="ea1">No — all after age 65</label></div>
+          <div class="opt-item"><input type="radio" name="earlyad" id="ea2"><label for="ea2">Yes — one member before age 65</label></div>
+          <div class="opt-item"><input type="radio" name="earlyad" id="ea3"><label for="ea3">Yes — more than one member before age 65</label></div>
+          <div class="opt-item"><input type="radio" name="earlyad" id="ea4"><label for="ea4">No family history of Alzheimer's or dementia</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Specific ages, which relatives, APOE testing if done..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">9</span>If any relatives had Parkinson's disease or a movement disorder, did onset occur before age 50?</span>
+        <div class="q-hint">Early-onset Parkinson's (before age 50) has a substantially higher genetic component and changes the clinical picture significantly.</div>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="radio" name="earlypd" id="ep1"><label for="ep1">No — all after age 50</label></div>
+          <div class="opt-item"><input type="radio" name="earlypd" id="ep2"><label for="ep2">Yes — one member before age 50</label></div>
+          <div class="opt-item"><input type="radio" name="earlypd" id="ep3"><label for="ep3">Yes — more than one member before age 50</label></div>
+          <div class="opt-item"><input type="radio" name="earlypd" id="ep4"><label for="ep4">No family history of Parkinson's or movement disorders</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Specific ages of onset, which relatives, any genetic testing done..."></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Your Chronological Health Timeline</div>
+      <div class="clinical-note"><strong>This section generates your personal health timeline graphic.</strong> List major events in chronological order — injuries, illnesses, exposures, diagnoses, surgeries, medications, stressors, and first appearance of any symptoms. Approximate dates are fine. Add as many events as relevant.<br><br>Note: Items you checked in earlier sections with a year or age will automatically appear on your timeline. Add anything additional here.</div>
+      <div class="timeline-events" id="timelineEvents"></div>
+      <button class="add-event-btn" onclick="addTimelineEvent()">+ Add health event</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 13: MOVEMENT & MOTOR SYMPTOMS ===================== -->
+<div class="section" id="sec-13">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <div>
+        <div class="section-title">Movement & Motor Symptoms</div>
+        <div class="section-subtitle">Parkinson's, movement disorders, and autonomic nervous system</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="clinical-note">
+        <strong>Answer this section if you or others have noticed any changes in movement, balance, coordination, or physical expression.</strong> If none of these apply to you, check "None of these apply" at the bottom of each question and continue to submit. This section takes less than 2 minutes to skip through if not relevant.
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">1</span>Have you or others noticed any of the following changes in how you move? (Check all that apply)</span>
+        <div class="options-grid single-col">
+          <div class="opt-item"><input type="checkbox" id="mot1"><label for="mot1">Shaking or trembling of a hand, finger, or arm when it is resting — not during movement</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot2"><label for="mot2">Shaking or trembling during movement or when holding a position (such as holding a cup)</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot3"><label for="mot3">Muscle stiffness or rigidity in arms, legs, or neck</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot4"><label for="mot4">Slowness when starting to move — taking longer to get up, turn, or begin walking</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot5"><label for="mot5">Shuffling steps or shorter stride length than before</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot6"><label for="mot6">One arm swings less than the other while walking</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot7"><label for="mot7">Difficulty with balance or unexpected falls</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot8"><label for="mot8">Freezing — feet feel stuck to the floor when trying to walk</label></div>
+          <div class="opt-item"><input type="checkbox" id="mot_none"><label for="mot_none">None of these apply</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="When did you first notice? Which side? Getting worse?"></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">2</span>Fine motor and handwriting changes</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="writing" id="wr0"><label for="wr0">No change in handwriting</label></div>
+          <div class="opt-item"><input type="radio" name="writing" id="wr1"><label for="wr1">Handwriting slightly smaller than before</label></div>
+          <div class="opt-item"><input type="radio" name="writing" id="wr2"><label for="wr2">Handwriting noticeably smaller or harder to read</label></div>
+          <div class="opt-item"><input type="radio" name="writing" id="wr3"><label for="wr3">Rarely write by hand — cannot compare</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Difficulty buttoning, using keys, typing, or other fine motor tasks..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">3</span>Fine motor task difficulty — how often do you have trouble with these?</span>
+        <div class="clinical-note" style="margin-bottom:12px">0 = Never &nbsp;|&nbsp; 1 = Occasionally &nbsp;|&nbsp; 2 = Frequently &nbsp;|&nbsp; 3 = Almost always</div>
+        <div id="fineMotorScale"></div>
+        <div class="notes-field" style="margin-top:12px"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Which tasks are most affected? One hand vs both?"></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Face, voice, and expression</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">4</span>Have others commented that your voice has changed? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="voice1"><label for="voice1">Voice has become softer or quieter</label></div>
+          <div class="opt-item"><input type="checkbox" id="voice2"><label for="voice2">Voice has become monotone — less variation in pitch</label></div>
+          <div class="opt-item"><input type="checkbox" id="voice3"><label for="voice3">Speech has become faster or words run together</label></div>
+          <div class="opt-item"><input type="checkbox" id="voice4"><label for="voice4">No change in voice</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="When did this begin? Does it fluctuate?"></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">5</span>Have others told you that your face appears less expressive or seems like a "mask"?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="hypomimia" id="hm1"><label for="hm1">No — expressions are normal</label></div>
+          <div class="opt-item"><input type="radio" name="hypomimia" id="hm2"><label for="hm2">Yes — occasionally commented on</label></div>
+          <div class="opt-item"><input type="radio" name="hypomimia" id="hm3"><label for="hm3">Yes — frequently or clearly noticeable</label></div>
+          <div class="opt-item"><input type="radio" name="hypomimia" id="hm4"><label for="hm4">Unknown / not asked</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder=""></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Autonomic nervous system</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">6</span>Do you feel lightheaded, dizzy, or nearly faint when you stand up quickly from sitting or lying down?</span>
+        <div class="q-hint">This is called orthostatic hypotension and is common in Parkinson's disease.</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="ortho" id="or1"><label for="or1">Never</label></div>
+          <div class="opt-item"><input type="radio" name="ortho" id="or2"><label for="or2">Occasionally</label></div>
+          <div class="opt-item"><input type="radio" name="ortho" id="or3"><label for="or3">Frequently</label></div>
+          <div class="opt-item"><input type="radio" name="ortho" id="or4"><label for="or4">Almost every time I stand</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Do you need to pause before walking? Have you fallen because of it?"></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">7</span>Do you experience urinary urgency — a sudden strong need to urinate that is difficult to delay?</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="urgency" id="urg1"><label for="urg1">Never</label></div>
+          <div class="opt-item"><input type="radio" name="urgency" id="urg2"><label for="urg2">Occasionally</label></div>
+          <div class="opt-item"><input type="radio" name="urgency" id="urg3"><label for="urg3">Frequently</label></div>
+          <div class="opt-item"><input type="radio" name="urgency" id="urg4"><label for="urg4">Daily or multiple times daily</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Nocturia, incontinence, other urinary changes..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">8</span>Have you noticed unusual sweating patterns? (Check all that apply)</span>
+        <div class="options-grid">
+          <div class="opt-item"><input type="checkbox" id="sweat1"><label for="sweat1">Reduced sweating — less than you would expect during exertion or heat</label></div>
+          <div class="opt-item"><input type="checkbox" id="sweat2"><label for="sweat2">Excessive sweating unrelated to exertion or heat</label></div>
+          <div class="opt-item"><input type="checkbox" id="sweat3"><label for="sweat3">Sweating on one side of the body more than the other</label></div>
+          <div class="opt-item"><input type="checkbox" id="sweat4"><label for="sweat4">No unusual sweating patterns</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="When did this start? Under what circumstances?"></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">9</span>Have you noticed oily or greasy skin on your face, particularly on the forehead or scalp?</span>
+        <div class="q-hint">Seborrhea is a less-known autonomic feature of Parkinson's disease.</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="seborrhea" id="seb1"><label for="seb1">No change</label></div>
+          <div class="opt-item"><input type="radio" name="seborrhea" id="seb2"><label for="seb2">Mild increase in oiliness</label></div>
+          <div class="opt-item"><input type="radio" name="seborrhea" id="seb3"><label for="seb3">Noticeably oilier than before</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder=""></textarea></div>
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Prodromal indicators already asked — cross-reference</div>
+
+      <div class="clinical-note">
+        The following symptoms were asked in earlier sections but are especially significant as Parkinson's prodromal indicators. They can appear <strong>10–20 years before motor symptoms</strong>. Your earlier responses are already recorded — this is for your awareness only.<br><br>
+        ✓ &nbsp;Loss of smell (Section 2 / Cognitive symptoms)<br>
+        ✓ &nbsp;Constipation — fewer than 3 bowel movements per week (Section 6 / Gut)<br>
+        ✓ &nbsp;REM sleep behavior disorder — acting out dreams (Section 4 / Sleep)<br>
+        ✓ &nbsp;Depression or anxiety with early onset (Section 11 / Stress)
+      </div>
+
+      <div class="q-divider"></div>
+      <div class="sub-heading">Medication history relevant to movement disorders</div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">10</span>Have you ever taken medications that block dopamine? These can cause or worsen Parkinson-like symptoms.</span>
+        <div class="q-hint">Examples: antipsychotics (Haldol, Risperdal, Zyprexa, Seroquel), some anti-nausea drugs (metoclopramide / Reglan, prochlorperazine / Compazine), some older antidepressants</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="dopblock" id="db1" onchange="buildDopBlockExpand(false)"><label for="db1">No — never taken these</label></div>
+          <div class="opt-item"><input type="radio" name="dopblock" id="db2" onchange="buildDopBlockExpand(true)"><label for="db2">Yes — in the past, no longer taking</label></div>
+          <div class="opt-item"><input type="radio" name="dopblock" id="db3" onchange="buildDopBlockExpand(true)"><label for="db3">Yes — currently taking</label></div>
+          <div class="opt-item"><input type="radio" name="dopblock" id="db4" onchange="buildDopBlockExpand(false)"><label for="db4">Unsure</label></div>
+        </div>
+        <div id="dopBlockDetail"></div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Medication name, dose, how long taken..."></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">11</span>Do motor symptoms — stiffness, tremor, slowness — fluctuate noticeably throughout the day?</span>
+        <div class="q-hint">Fluctuating symptoms can indicate either Parkinson's (especially if related to medication timing) or Lewy body dementia.</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="motorflux" id="mf1"><label for="mf1">No — consistent throughout the day</label></div>
+          <div class="opt-item"><input type="radio" name="motorflux" id="mf2"><label for="mf2">Yes — worse in the morning</label></div>
+          <div class="opt-item"><input type="radio" name="motorflux" id="mf3"><label for="mf3">Yes — worse in the afternoon or evening</label></div>
+          <div class="opt-item"><input type="radio" name="motorflux" id="mf4"><label for="mf4">Yes — fluctuates unpredictably</label></div>
+          <div class="opt-item"><input type="radio" name="motorflux" id="mf5"><label for="mf5">No motor symptoms to assess</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="Any pattern — related to meals, medication, sleep, stress?"></textarea></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-label"><span class="q-num">12</span>Have you experienced visual hallucinations — seeing things that others do not see?</span>
+        <div class="q-hint">Visual hallucinations are an important distinguishing feature of Lewy body dementia versus Parkinson's disease versus Alzheimer's disease.</div>
+        <div class="options-grid">
+          <div class="opt-item"><input type="radio" name="halluc" id="hal1"><label for="hal1">Never</label></div>
+          <div class="opt-item"><input type="radio" name="halluc" id="hal2"><label for="hal2">Once or twice — minor</label></div>
+          <div class="opt-item"><input type="radio" name="halluc" id="hal3"><label for="hal3">Occasionally — people, animals, or objects</label></div>
+          <div class="opt-item"><input type="radio" name="halluc" id="hal4"><label for="hal4">Frequently — distressing or confusing</label></div>
+        </div>
+        <div class="notes-field"><div class="notes-field-label">Notes</div><textarea class="notes-textarea" placeholder="What do you see? When does it happen? Are you aware it isn't real?"></textarea></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button class="btn btn-prev" onclick="changeSection(-1)">← Previous</button>
+    <button class="btn btn-submit" onclick="submitForm()">Submit Form ✓</button>
+  </div>
+</div>
+
+<!-- COMPLETION -->
+<div class="completion-card" id="completionCard">
+  <div class="completion-icon">✓</div>
+  <h2>Intake Complete</h2>
+  <p>Thank you. Your responses have been recorded. Please download your copies below — the practice copy should be brought to your appointment or sent ahead of time.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:680px;margin:0 auto 28px;text-align:left">
+
+    <div style="background:#eef7f5;border:1.5px solid #2a7d6e;border-radius:10px;padding:18px 16px">
+      <div style="font-size:13px;font-weight:700;color:#1a2744;margin-bottom:6px">Patient Summary</div>
+      <div style="font-size:12px;color:#5c5a55;margin-bottom:14px;line-height:1.5">Your answers in plain language — sections with responses only. For your records.</div>
+      <button class="btn btn-next" onclick="generatePDF('patient')" style="width:100%;justify-content:center;font-size:13px;padding:9px 12px">
+        Download Patient Copy
+      </button>
+    </div>
+
+    <div style="background:#e8f1fb;border:1.5px solid #1a5fa8;border-radius:10px;padding:18px 16px">
+      <div style="font-size:13px;font-weight:700;color:#1a2744;margin-bottom:6px">Practice Copy</div>
+      <div style="font-size:12px;color:#5c5a55;margin-bottom:14px;line-height:1.5">Complete responses, all sections. Bring to your appointment or send to the practice.</div>
+      <button class="btn btn-submit" onclick="generatePDF('practice')" style="width:100%;justify-content:center;font-size:13px;padding:9px 12px">
+        Download Practice Copy
+      </button>
+    </div>
+
+    <div style="background:#fef3e2;border:1.5px solid #c27b0a;border-radius:10px;padding:18px 16px">
+      <div style="font-size:13px;font-weight:700;color:#1a2744;margin-bottom:6px">Clinical Summary</div>
+      <div style="font-size:12px;color:#5c5a55;margin-bottom:14px;line-height:1.5">Answers organized by clinical driver domain. For physician review before your visit.</div>
+      <button onclick="generatePDF('clinical')" style="width:100%;justify-content:center;font-size:13px;padding:9px 12px;background:linear-gradient(135deg,#c27b0a,#e09a2a);color:white;border:none;border-radius:8px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:600">
+        Download Clinical Copy
+      </button>
+    </div>
+  </div>
+
+  <div style="background:#eef7f5;border:1.5px solid #2a7d6e40;border-radius:10px;padding:20px 24px;max-width:460px;margin:0 auto 24px;text-align:left">
+    <div style="font-family:'Playfair Display',serif;font-size:16px;color:#1a2744;margin-bottom:8px">Optional — Before Your Appointment</div>
+    <div style="background:white;border:1px solid #ddd9d0;border-radius:8px;padding:12px 14px;margin-bottom:10px">
+      <div style="font-size:13px;font-weight:600;color:#1a2744;margin-bottom:4px">XpressO by MoCA — Memory Self-Test</div>
+      <div style="font-size:12px;color:#5c5a55;margin-bottom:10px;line-height:1.5">A 5-minute self-administered memory test created by the neurologist who developed the MoCA. Works on any device. Bring your score report to your visit.</div>
+      <a href="https://www.mocaxpresso.com" target="_blank" style="display:inline-block;background:#2a7d6e;color:white;font-size:13px;font-weight:600;padding:7px 16px;border-radius:7px;text-decoration:none">Take the XpressO Test →</a>
+    </div>
+  </div>
+
+  <div id="pdfStatus" style="font-size:13px;color:#2a7d6e;font-weight:600;min-height:20px;text-align:center"></div>
+</div>
+
+<div class="nav-bar" id="mainNavBar">
+  <button class="btn btn-prev" id="btnPrev" onclick="changeSection(-1)" style="visibility:hidden">← Previous</button>
+  <button class="btn btn-next" id="btnNext" onclick="changeSection(1)">Continue →</button>
+</div>
+
+</div><!-- /form-container -->
+
+<script>
+// ============================================================
+// DATA DEFINITIONS
+// ============================================================
+const freqLabels = ['Never','Occ.','Weekly','Daily'];
+const funcLabels = ['Independent','Some Help','Regular Help',"Can't Do"];
+
+const memItems = [
+  'Repeated the same question or story within the same conversation',
+  'Forgotten appointments, meetings, or scheduled events',
+  'Needed written reminders for routine tasks you previously remembered',
+  'Forgotten whether you already took your medications',
+  'Forgotten events that happened earlier the same day'
+];
+const langItems = [
+  'Paused mid-sentence because you could not find the right word',
+  'Substituted "that thing" or "you know" because the correct word would not come',
+  'Had difficulty following a conversation with more than two people',
+  'Lost track of what someone was saying before they finished speaking'
+];
+const orientItems = [
+  'Entered a room and could not remember why you went there',
+  'Become disoriented or confused in a familiar place',
+  'Needed GPS for a route you previously knew well',
+  'Forgotten the names of close friends or family members'
+];
+const funcItems = [
+  'Managing medications (correct dose, correct time)',
+  'Driving independently to familiar destinations',
+  'Paying bills or managing finances',
+  'Cooking a multi-step meal',
+  'Shopping for groceries independently',
+  'Using a phone, computer, or tablet for everyday tasks',
+  'Keeping track of appointments and commitments'
+];
+
+// ── SIMPLE date-only TL lists (no extra sub-fields needed) ──────────────────
+const metaDxItems = [
+  'Prediabetes','Type 2 diabetes','Fatty liver / NAFLD',
+  'Elevated triglycerides','Elevated fasting insulin','Metabolic syndrome','None of these'
+];
+const psychItems = [
+  'History of clinical depression','History of anxiety disorder',
+  'Post-traumatic stress (PTSD)','Caregiver stress',
+  'Significant grief or bereavement','Childhood abuse or neglect','None of these'
+];
+
+// ── CLINICAL GROUPS — date + condition-specific sub-fields ──────────────────
+// Each item: { id, label, none?, fields:[{label,type,ph,opts?}] }
+// type: 'text' | 'select' | 'yesno'
+// none:true = no date pill, no sub-fields
+
+const gutHxGroups = [
+  { id:'ghx_gb',    label:'Gallbladder removal',
+    fields:[] },
+  { id:'ghx_ppi',   label:'Antacid / PPI use longer than 3 months',
+    fields:[
+      {label:'Which medication',type:'text',ph:'e.g. Prilosec, Nexium, omeprazole'},
+      {label:'Still taking?',   type:'yesno'}
+    ]},
+  { id:'ghx_abx',   label:'More than 3 antibiotic courses in any 2-year period',
+    fields:[
+      {label:'Most common antibiotic(s)',type:'text',ph:'e.g. amoxicillin, cipro'},
+      {label:'Primary reason taken',    type:'text',ph:'e.g. sinus infections, UTIs'},
+      {label:'Still recurring?',        type:'yesno'}
+    ]},
+  { id:'ghx_hpyl',  label:'H. pylori infection',
+    fields:[
+      {label:'Was it treated?',         type:'yesno'},
+      {label:'Confirmed eradicated?',   type:'select',opts:['— Select —','Yes — confirmed by follow-up test','No — not re-tested','No — treatment failed','Unknown']}
+    ]},
+  { id:'ghx_sibo',  label:'SIBO diagnosis',
+    fields:[
+      {label:'Treated?',  type:'yesno'},
+      {label:'Resolved?', type:'select',opts:['— Select —','Yes — resolved','Partially resolved','Still active','Unknown']}
+    ]},
+  { id:'ghx_cel',   label:'Celiac disease or confirmed gluten intolerance',
+    fields:[
+      {label:'Confirmed by biopsy or blood test?', type:'yesno'},
+      {label:'Currently gluten-free?',             type:'yesno'}
+    ]},
+  { id:'ghx_ibd',   label:"Crohn's disease or ulcerative colitis",
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. Humira, mesalamine'},
+      {label:'Disease currently',    type:'select',opts:['— Select —','In remission','Mildly active','Moderately/severely active','Unknown']}
+    ]},
+  { id:'ghx_cand',  label:'Chronic yeast / Candida issues',
+    fields:[
+      {label:'Location(s)',   type:'text',ph:'e.g. oral, vaginal, skin, gut'},
+      {label:'Treatment used',type:'text',ph:'e.g. fluconazole, nystatin, dietary'},
+      {label:'Still recurring?',type:'yesno'}
+    ]},
+  { id:'ghx_none',  label:'None of these', none:true, fields:[] }
+];
+
+const infectGroups = [
+  { id:'inf_lyme',  label:'Lyme disease',
+    fields:[
+      {label:'Was it treated with antibiotics?', type:'yesno'},
+      {label:'Treatment status', type:'select',opts:['— Select —','Fully treated — symptoms resolved','Treated — symptoms persist (chronic Lyme)','Partially treated','Not treated','Unknown']},
+    ]},
+  { id:'inf_ebv',   label:'Epstein-Barr virus / mononucleosis',
+    fields:[
+      {label:'Ever had EBV reactivation (recurrent fatigue, mono-like symptoms)?', type:'yesno'},
+      {label:'If yes — approximately how many reactivations',type:'text',ph:'e.g. 2–3 times, unknown'}
+    ]},
+  { id:'inf_sinus', label:'Chronic sinus infections',
+    fields:[
+      {label:'Approx. infections per year',type:'select',opts:['— Select —','1–2 per year','3–4 per year','5+ per year','Constant / never fully clears']},
+      {label:'Usually treated with antibiotics?',type:'yesno'},
+      {label:'Any imaging (CT scan) of sinuses?',type:'yesno'}
+    ]},
+  { id:'inf_hsv',   label:'Herpes simplex (cold sores or genital)',
+    fields:[] },
+  { id:'inf_cand',  label:'Recurring yeast / Candida infections',
+    fields:[
+      {label:'How often?',type:'select',opts:['— Select —','A few times ever','Several times per year','Monthly or more','Constant']},
+      {label:'Currently recurring?',type:'yesno'}
+    ]},
+  { id:'inf_hpyl',  label:'H. pylori',
+    fields:[
+      {label:'Confirmed eradicated?',type:'select',opts:['— Select —','Yes — confirmed by follow-up test','Not re-tested','Treatment failed or incomplete','Unknown']}
+    ]},
+  { id:'inf_lc',    label:'Long COVID (prolonged symptoms after COVID-19)',
+    fields:[
+      {label:'Main ongoing symptoms',type:'text',ph:'e.g. brain fog, fatigue, shortness of breath'},
+      {label:'How long since acute COVID infection',type:'text',ph:'e.g. 2 years'},
+      {label:'Symptoms still present?',type:'yesno'}
+    ]},
+  { id:'inf_toe',   label:'Toenail fungus or chronic skin fungal infections', fields:[] },
+  { id:'inf_none',  label:'None known', none:true, fields:[] }
+];
+
+const autoimGroups = [
+  { id:'ai_hashi',  label:"Hashimoto's thyroiditis",
+    fields:[
+      {label:'Current medication',type:'text',ph:'e.g. levothyroxine 75mcg'},
+      {label:'Disease currently', type:'select',opts:['— Select —','Well controlled','Partially controlled','Poorly controlled / symptomatic','Unknown']}
+    ]},
+  { id:'ai_ra',     label:'Rheumatoid arthritis',
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. methotrexate, Humira'},
+      {label:'Disease currently',    type:'select',opts:['— Select —','In remission','Low activity','Moderate/high activity','Unknown']}
+    ]},
+  { id:'ai_lupus',  label:'Lupus',
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. hydroxychloroquine'},
+      {label:'Disease currently',    type:'select',opts:['— Select —','In remission','Active','Unknown']}
+    ]},
+  { id:'ai_ms',     label:'Multiple sclerosis',
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. Tecfidera, Ocrevus'},
+      {label:'Disease type',         type:'select',opts:['— Select —','Relapsing-remitting','Secondary progressive','Primary progressive','Unknown']}
+    ]},
+  { id:'ai_pso',    label:'Psoriasis or psoriatic arthritis', fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. topical, biologics, methotrexate'},
+      {label:'Severity', type:'select',opts:['— Select —','Mild (mostly skin)','Moderate','Severe / systemic','Unknown']}
+    ]},
+  { id:'ai_other',  label:'Other autoimmune condition',
+    fields:[
+      {label:'Condition name',       type:'text',ph:'Please specify the condition'},
+      {label:'Current medication(s)',type:'text',ph:'e.g. steroids, biologics, IVIG'},
+      {label:'Disease currently',    type:'select',opts:['— Select —','In remission','Active','Unknown']}
+    ]},
+  { id:'ai_none',   label:'None known', none:true, fields:[] }
+];
+
+const vascGroups = [
+  { id:'vasc_htn',  label:'High blood pressure (hypertension)',
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. lisinopril 10mg, amlodipine 5mg'},
+      {label:'Average blood pressure if known',type:'text',ph:'e.g. 140/90, unknown'},
+      {label:'Currently controlled?',type:'select',opts:['— Select —','Yes — well controlled','Partially controlled','Poorly controlled / high readings','Unknown']}
+    ]},
+  { id:'vasc_afib', label:'Atrial fibrillation or irregular heartbeat',
+    fields:[
+      {label:'Current medication(s)',type:'text',ph:'e.g. eliquis, metoprolol, amiodarone'},
+      {label:'Currently in atrial fibrillation?',type:'yesno'}
+    ]},
+  { id:'vasc_stroke',label:'Stroke or TIA (mini-stroke)',
+    fields:[
+      {label:'Which type',   type:'select',opts:['— Select —','Ischemic stroke','Hemorrhagic stroke','TIA (mini-stroke)','Unknown']},
+      {label:'Which side of body affected', type:'select',opts:['— Select —','Left side','Right side','Both / diffuse','Unknown / no motor deficits']},
+      {label:'Any lasting deficits?',type:'text',ph:'e.g. none, mild word-finding, weakness, none apparent'}
+    ]},
+  { id:'vasc_cad',  label:'Coronary artery disease or heart attack',
+    fields:[
+      {label:'Current cardiac medications',type:'text',ph:'e.g. aspirin, statin, beta-blocker'}
+    ]},
+  { id:'vasc_chol', label:'High LDL cholesterol',
+    fields:[
+      {label:'Current medication',  type:'text',ph:'e.g. atorvastatin 40mg, none'},
+      {label:'Most recent LDL if known',type:'text',ph:'e.g. 160 mg/dL, unknown'}
+    ]},
+  { id:'vasc_car',  label:'Carotid artery disease',
+    fields:[
+      {label:'Degree of stenosis if known',type:'text',ph:'e.g. 50%, significant, unknown'}
+    ]},
+  { id:'vasc_osa',  label:'Sleep apnea (diagnosed)',
+    fields:[
+      {label:'Treatment',    type:'select',opts:['— Select —','CPAP — using nightly','CPAP — using sometimes (< 4 nights/week)','CPAP — prescribed but not using','BiPAP','Oral appliance','Surgery','No treatment']},
+      {label:'AHI / severity if known',type:'text',ph:'e.g. mild (AHI 8), severe (AHI 42), unknown'}
+    ]},
+  { id:'vasc_none', label:'None of these', none:true, fields:[] }
+];
+
+// Thyroid is handled separately inside section 9 HTML — see buildThyroidExpand()
+// Head injuries handled by per-event card builder — see buildHeadInjuryCards()
+
+// Toxic exposure groups (expandable) — standardized fields for all
+// Fields: substance/chemical name | duration | still ongoing
+const toxExpGroups = [
+  { id:'pest',    label:'Pesticides or herbicides' },
+  { id:'solv',    label:'Solvents (paint thinner, degreasers, dry cleaning chemicals)' },
+  { id:'metal',   label:'Heavy metals (lead paint, mercury, cadmium, arsenic)' },
+  { id:'weld',    label:'Welding fumes (manganese exposure)' },
+  { id:'indus',   label:'Industrial chemicals or factory work' },
+  { id:'agri',    label:'Agricultural work (farm, nursery, crop dusting)' },
+  { id:'amalg',   label:'Mercury dental amalgam fillings (silver fillings)' },
+  { id:'salon',   label:'Hair salon / nail salon chemicals (formaldehyde, dyes)' },
+  { id:'indust2', label:'Lived near agriculture or industrial sites' },
+  { id:'toxother',label:'Other exposure not listed' }
+];
+
+// Cognitively impairing medications
+const cogMedGroups = [
+  { id:'benzo',  label:'Benzodiazepines (Xanax, Ativan, Valium, Klonopin, etc.)' },
+  { id:'sleeprx',label:'Prescription sleep medications (Ambien, Lunesta, Belsomra, etc.)' },
+  { id:'antich', label:'Anticholinergic medications (bladder, some antihistamines, some antidepressants)' },
+  { id:'statin', label:'Statin medications (Lipitor, Crestor, Zocor, Pravachol, etc.)' },
+  { id:'antidep',label:'Antidepressants' },
+  { id:'antipsy',label:'Antipsychotic medications' },
+  { id:'ppi',    label:'Proton pump inhibitors longer than 6 months (Prilosec, Nexium, Protonix, etc.)' }
+];
+
+// Family history conditions
+const famConditions = [
+  "Alzheimer's disease","Dementia (other or unspecified)","Parkinson's disease",
+  'Lewy body dementia','Stroke','Type 2 diabetes','Autoimmune disease','Heart disease'
+];
+const famMembers = [
+  'Mother','Father','Maternal Grandmother','Maternal Grandfather',
+  'Paternal Grandmother','Paternal Grandfather','Sister','Brother',
+  'Maternal Aunt','Maternal Uncle','Paternal Aunt','Paternal Uncle'
+];
+
+const eventCategories = [
+  'Birth / developmental','Concussion / head injury','Other injury or accident',
+  'Infection','Surgery','Medication start','Medication stop','Toxic exposure',
+  'Major life stress','Divorce or relationship loss','Bereavement','Financial stress',
+  'Sleep issue (onset)','Digestive issue (onset)','Hormonal change',
+  'Metabolic diagnosis','Cardiovascular event','Neurologic symptom',
+  'Cognitive symptom (onset)','Mood change (onset)','Other'
+];
+
+// ============================================================
+// HELPER: render a severity/frequency scale
+// ============================================================
+function renderScale(containerId, items, labels, prefix) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = items.map((item, i) => `
+    <div class="severity-row">
+      <div class="severity-label">${item}</div>
+      <div class="severity-opts">
+        ${labels.map((lbl,j) => `
+          <label>
+            <input type="radio" name="${prefix}_${i}" value="${lbl}">
+            <div class="dot">${j}</div>
+            <span>${lbl}</span>
+          </label>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// renderTLList — simple date pill only (no sub-fields)
+// Used for: metaDxItems, psychItems
+// ============================================================
+function renderTLList(containerId, items, prefix, noDateLabels = ['None of these','None known','None']) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = items.map((item, i) => {
+    const isNone = noDateLabels.includes(item);
+    const cbId   = `${prefix}_${i}`;
+    const pillId = `${cbId}_date`;
+    const rYId   = `${cbId}_ry`;
+    const rAId   = `${cbId}_ra`;
+    const rName  = `${cbId}_tog`;
+    const valId  = `${cbId}_val`;
+    if (isNone) {
+      return `<div class="tl-item"><div class="opt-item"><input type="checkbox" id="${cbId}"><label for="${cbId}">${item}</label></div></div>`;
+    }
+    return `<div class="tl-item">
+      <div class="tl-checkbox-row">
+        <div class="opt-item">
+          <input type="checkbox" id="${cbId}" onchange="toggleTLDate('${pillId}','${rYId}','${valId}',this.checked)">
+          <label for="${cbId}">${item}</label>
+        </div>
+        <div class="tl-date-pill" id="${pillId}">
+          <div class="tl-toggle">
+            <input type="radio" name="${rName}" id="${rYId}" value="year" checked onchange="updateTLPlaceholder('${valId}','year')">
+            <label for="${rYId}">Year</label>
+            <input type="radio" name="${rName}" id="${rAId}" value="age" onchange="updateTLPlaceholder('${valId}','age')">
+            <label for="${rAId}">Age</label>
+          </div>
+          <input type="number" class="tl-val" id="${valId}" name="${cbId}_val" placeholder="e.g. 1998" min="0" max="2030">
+          <span class="tl-hint">approx. ok</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleTLDate(pillId, radioYearId, valId, show) {
+  const pill = document.getElementById(pillId);
+  if (!pill) return;
+  pill.classList.toggle('visible', show);
+  if (show) {
+    const ry = document.getElementById(radioYearId);
+    if (ry) ry.checked = true;
+    updateTLPlaceholder(valId, 'year');
+  }
+}
+
+function updateTLPlaceholder(valId, mode) {
+  const el = document.getElementById(valId);
+  if (!el) return;
+  if (mode === 'year') { el.placeholder='e.g. 1998'; el.min=1920; el.max=2030; }
+  else                 { el.placeholder='e.g. 42';   el.min=0;    el.max=110;  }
+  el.value = '';
+  el.focus();
+}
+
+// ============================================================
+// renderClinicalList — date pill + condition-specific sub-fields
+// Used for: gutHxGroups, infectGroups, autoimGroups, vascGroups
+// ============================================================
+function makeSubField(gId, f, n) {
+  const name = `${gId}_${f.label.replace(/\W+/g,'_').toLowerCase()}_${n}`;
+  if (f.type === 'text') {
+    return `<div>
+      <span class="expand-row-label">${f.label}</span>
+      <input type="text" placeholder="${f.ph||''}" name="${name}">
+    </div>`;
+  }
+  if (f.type === 'yesno') {
+    return `<div>
+      <span class="expand-row-label">${f.label}</span>
+      <select name="${name}">
+        <option value="">— Select —</option>
+        <option>Yes</option><option>No</option><option>Unsure</option>
+      </select>
+    </div>`;
+  }
+  if (f.type === 'select') {
+    return `<div>
+      <span class="expand-row-label">${f.label}</span>
+      <select name="${name}">
+        ${f.opts.map(o=>`<option>${o}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+  return '';
+}
+
+function renderClinicalList(containerId, groups) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = groups.map(g => {
+    const cbId    = `cl_${g.id}`;
+    const pillId  = `${cbId}_date`;
+    const rYId    = `${cbId}_ry`;
+    const rAId    = `${cbId}_ra`;
+    const rName   = `${cbId}_tog`;
+    const valId   = `${cbId}_val`;
+    const panelId = `${cbId}_panel`;
+
+    if (g.none) {
+      return `<div class="tl-item"><div class="opt-item"><input type="checkbox" id="${cbId}"><label for="${cbId}">${g.label}</label></div></div>`;
+    }
+
+    const hasFields = g.fields && g.fields.length > 0;
+    const subFieldsHtml = hasFields
+      ? `<div class="expand-panel open" id="${panelId}" style="margin-top:8px">
+          <div class="expand-panel-label">Details</div>
+          <div class="expand-row ${g.fields.length >= 3 ? 'cols-3' : g.fields.length === 2 ? 'cols-2' : 'cols-2'}" style="grid-template-columns:${g.fields.length===1?'1fr':'repeat('+Math.min(g.fields.length,3)+',1fr)'}">
+            ${g.fields.map(f => makeSubField(g.id, f, 1)).join('')}
+            <div></div>
+          </div>
+        </div>`
+      : '';
+
+    const toggleFn = hasFields
+      ? `toggleClinicalItem('${pillId}','${rYId}','${valId}','${panelId}',this.checked)`
+      : `toggleTLDate('${pillId}','${rYId}','${valId}',this.checked)`;
+
+    return `<div class="tl-item">
+      <div class="tl-checkbox-row">
+        <div class="opt-item">
+          <input type="checkbox" id="${cbId}" onchange="${toggleFn}">
+          <label for="${cbId}">${g.label}</label>
+        </div>
+        <div class="tl-date-pill" id="${pillId}">
+          <div class="tl-toggle">
+            <input type="radio" name="${rName}" id="${rYId}" value="year" checked onchange="updateTLPlaceholder('${valId}','year')">
+            <label for="${rYId}">Year</label>
+            <input type="radio" name="${rName}" id="${rAId}" value="age" onchange="updateTLPlaceholder('${valId}','age')">
+            <label for="${rAId}">Age</label>
+          </div>
+          <input type="number" class="tl-val" id="${valId}" name="${cbId}_val" placeholder="e.g. 1998" min="0" max="2030">
+          <span class="tl-hint">approx. ok</span>
+        </div>
+      </div>
+      ${hasFields ? `<div style="display:none" id="${panelId}_wrap">${subFieldsHtml}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleClinicalItem(pillId, rYId, valId, panelId, show) {
+  toggleTLDate(pillId, rYId, valId, show);
+  const wrap = document.getElementById(panelId + '_wrap');
+  if (wrap) wrap.style.display = show ? 'block' : 'none';
+}
+
+// ============================================================
+// HEAD INJURY per-event card builder
+// ============================================================
+let headInjuryCount = 0;
+function addHeadInjuryCard() {
+  headInjuryCount++;
+  const n = headInjuryCount;
+  const c = document.getElementById('headInjuryCards');
+  c.insertAdjacentHTML('beforeend', `
+    <div class="tl-event-card" id="hi_card_${n}" style="margin-bottom:10px;position:relative">
+      <button type="button" class="remove-event-btn" onclick="document.getElementById('hi_card_${n}').remove()" title="Remove">×</button>
+      <div style="font-size:12px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Injury ${n}</div>
+      <div class="expand-row cols-3" style="grid-template-columns:1fr 1fr 1fr">
+        <div>
+          <span class="expand-row-label">Approximate year <em style="font-weight:400;text-transform:none">or age</em></span>
+          <input type="text" name="hi_${n}_when" placeholder="e.g. 1987 or age 22">
+        </div>
+        <div>
+          <span class="expand-row-label">Setting / cause</span>
+          <select name="hi_${n}_setting">
+            <option value="">— Select —</option>
+            <option>Sports / athletic activity</option>
+            <option>Motor vehicle accident</option>
+            <option>Fall</option>
+            <option>Military / blast exposure</option>
+            <option>Workplace accident</option>
+            <option>Assault</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <span class="expand-row-label">Loss of consciousness?</span>
+          <select name="hi_${n}_loc">
+            <option value="">— Select —</option>
+            <option>No loss of consciousness</option>
+            <option>Yes — briefly (seconds to minutes)</option>
+            <option>Yes — prolonged (more than 5 min)</option>
+            <option>Unknown</option>
+          </select>
+        </div>
+      </div>
+      <div class="expand-row" style="grid-template-columns:1fr;margin-top:8px">
+        <div>
+          <span class="expand-row-label">Symptoms that followed (check all that apply)</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+            ${['Headache','Confusion','Memory gap','Nausea/vomiting','Vision changes','Sleep disturbance','Mood changes','Persisting symptoms (weeks+)'].map(s=>`
+              <label style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--gray-600);cursor:pointer">
+                <input type="checkbox" name="hi_${n}_sym" value="${s}" style="accent-color:var(--teal)"> ${s}
+              </label>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`);
+}
+
+// ============================================================
+// THYROID expandable sub-fields (inside Section 9 HTML)
+// Called after thyroid radio selection — attached via JS after build
+// ============================================================
+function buildThyroidExpand() {
+  const c = document.getElementById('thyroidDetail');
+  if (!c) return;
+  c.innerHTML = `
+    <div class="expand-panel open" style="margin-top:10px">
+      <div class="expand-panel-label">Thyroid details</div>
+      <div class="expand-row" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div>
+          <span class="expand-row-label">Current thyroid medication &amp; dose</span>
+          <input type="text" name="thyroid_med" placeholder="e.g. levothyroxine 75mcg, Armour 60mg, none">
+        </div>
+        <div>
+          <span class="expand-row-label">Most recent TSH value (if known)</span>
+          <input type="text" name="thyroid_tsh" placeholder="e.g. 3.2, last tested 2023, unknown">
+        </div>
+        <div>
+          <span class="expand-row-label">Currently well controlled?</span>
+          <select name="thyroid_control">
+            <option value="">— Select —</option>
+            <option>Yes — symptoms well controlled</option>
+            <option>Partially — some symptoms remain</option>
+            <option>No — symptomatic / poorly controlled</option>
+            <option>Unknown / not monitored</option>
+          </select>
+        </div>
+      </div>
+    </div>`;
+}
+
+function handleThyroid(show) {
+  const c = document.getElementById('thyroidDetail');
+  if (!c) return;
+  if (show) { buildThyroidExpand(); }
+  else { c.innerHTML = ''; }
+}
+
+// ============================================================
+// HELPERS: expandable med/exposure panels (unchanged from v4)
+// ============================================================
+function makeExposeRow(gId, n, isFirst) {
+  const hideRemove = isFirst ? "style='display:none'" : '';
+  return `<div class="expand-row cols-3 exp-row" data-n="${n}">
+    <div><span class="expand-row-label">Substance / chemical name</span><input type="text" placeholder="e.g. Roundup, trichloroethylene..." name="${gId}_sub_${n}"></div>
+    <div><span class="expand-row-label">Duration of exposure</span><input type="text" placeholder="e.g. 10 years, briefly, ongoing" name="${gId}_dur_${n}"></div>
+    <div><span class="expand-row-label">Still ongoing?</span>
+      <select name="${gId}_ongoing_${n}">
+        <option value="">— Select —</option>
+        <option>Yes — currently ongoing</option>
+        <option>No — past exposure only</option>
+        <option>Unsure</option>
+      </select>
+    </div>
+    <button type="button" class="remove-row-btn" ${hideRemove} onclick="this.closest('.exp-row').remove()">×</button>
+  </div>`;
+}
+
+function makeMedRow(gId, n, isFirst) {
+  const hideRemove = isFirst ? "style='display:none'" : '';
+  return `<div class="expand-row cols-2">
+    <div><span class="expand-row-label">Medication name</span><input type="text" placeholder="e.g. Xanax" name="${gId}_name_${n}"></div>
+    <div><span class="expand-row-label">Dose &amp; frequency</span><input type="text" placeholder="e.g. 0.5mg nightly" name="${gId}_dose_${n}"></div>
+    <button type="button" class="remove-row-btn" ${hideRemove} onclick="this.closest('.expand-row').remove()">×</button>
+  </div>`;
+}
+
+function renderExpandableGroups(containerId, groups, mode) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = groups.map(g => {
+    const panelId = `panel_${g.id}`;
+    const listId  = `list_${g.id}`;
+    const cbId    = `cb_${g.id}`;
+    const firstRow = mode === 'med' ? makeMedRow(g.id, 1, true) : makeExposeRow(g.id, 1, true);
+    const addLabel = mode === 'med' ? '+ Add another' : '+ Add another substance';
+    const addFn    = mode === 'med' ? `addMedRow('${listId}','${g.id}')` : `addExposureRow('${listId}','${g.id}')`;
+    return `
+      <div class="opt-item" style="margin-bottom:6px">
+        <input type="checkbox" id="${cbId}" onchange="togglePanel('${panelId}', this.checked)">
+        <label for="${cbId}">${g.label}</label>
+      </div>
+      <div class="expand-panel" id="${panelId}">
+        <div class="expand-panel-label">${mode === 'med' ? 'List your medications' : 'Provide exposure details'}</div>
+        <div id="${listId}">${firstRow}</div>
+        <button type="button" class="add-row-btn" onclick="${addFn}">${addLabel}</button>
+      </div>`;
+  }).join('');
+}
+
+function togglePanel(panelId, show) {
+  const el = document.getElementById(panelId);
+  if (el) el.classList.toggle('open', show);
+}
+
+const rowCounters = {};
+function addMedRow(listId, prefix) {
+  rowCounters[prefix] = (rowCounters[prefix] || 1) + 1;
+  document.getElementById(listId).insertAdjacentHTML('beforeend', makeMedRow(prefix, rowCounters[prefix], false));
+}
+function addExposureRow(listId, prefix) {
+  rowCounters[prefix] = (rowCounters[prefix] || 1) + 1;
+  document.getElementById(listId).insertAdjacentHTML('beforeend', makeExposeRow(prefix, rowCounters[prefix], false));
+}
+function addGenericMed(listId, prefix) {
+  rowCounters[prefix] = (rowCounters[prefix] || 0) + 1;
+  const n = rowCounters[prefix];
+  document.getElementById(listId).insertAdjacentHTML('beforeend', `
+    <div class="expand-row cols-2" style="margin-top:8px">
+      <div><span class="expand-row-label">Name</span><input type="text" placeholder="Medication / supplement name" name="${prefix}_name_${n}"></div>
+      <div><span class="expand-row-label">Dose &amp; frequency</span><input type="text" placeholder="e.g. 10mg daily" name="${prefix}_dose_${n}"></div>
+      <button type="button" class="remove-row-btn" onclick="this.closest('.expand-row').remove()">×</button>
+    </div>`);
+}
+
+// ============================================================
+// FAMILY HISTORY with member tags + Other field + age
+// ============================================================
+function buildFamHx() {
+  const c = document.getElementById('famHxContainer');
+  famConditions.forEach((cond, i) => {
+    const cbId = `fam_${i}`;
+    const panelId = `fampanel_${i}`;
+    const div = document.createElement('div');
+    div.className = 'fam-condition-block';
+    div.innerHTML = `
+      <div class="fam-condition-check" onclick="toggleFamPanel('${panelId}', document.getElementById('${cbId}'))">
+        <input type="checkbox" id="${cbId}" onclick="event.stopPropagation();toggleFamPanel('${panelId}', this)">
+        <span>${cond}</span>
+      </div>
+      <div class="fam-member-panel" id="${panelId}">
+        <div class="fam-member-panel-title">Which family members were affected? (select all that apply)</div>
+        <div class="fam-tags">
+          ${famMembers.map(m => `<span class="fam-tag" onclick="this.classList.toggle('selected')">${m}</span>`).join('')}
+        </div>
+        <div class="fam-other-row">
+          <label>Other:</label>
+          <input type="text" placeholder="Specify other relative...">
+        </div>
+        <div class="fam-age-row">
+          <label>Approx. age at diagnosis (if known):</label>
+          <input type="number" placeholder="Age" min="0" max="110">
+          <label style="margin-left:10px">or year:</label>
+          <input type="number" placeholder="Year" min="1920" max="2030">
+        </div>
+      </div>`;
+    c.appendChild(div);
+  });
+  // Add "None known" at bottom without panel
+  const noneDiv = document.createElement('div');
+  noneDiv.className = 'fam-condition-block';
+  noneDiv.innerHTML = `<div class="fam-condition-check"><input type="checkbox" id="fam_none"><span>None known</span></div>`;
+  c.appendChild(noneDiv);
+}
+
+function toggleFamPanel(panelId, checkbox) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  panel.classList.toggle('open', checkbox.checked);
+}
+
+// ============================================================
+// SLEEP section — rendered from JS for DRY consistency
+// ============================================================
+function buildSleepSection() {
+  const c = document.getElementById('sleepQs');
+  const qs = [
+    { q:'Average hours of sleep per night', name:'sleepdur',
+      opts:['Less than 5 hours','5–6 hours','7–8 hours','More than 8 hours'], note:'Bedtime routine, schedule variability...' },
+    { q:'How many times do you typically wake during the night?', name:'wakeups',
+      opts:['None','1–2 times','3–4 times','More than 4 times'], note:'Reason for waking — pain, urgency, anxiety, unknown...' },
+    { q:"Do you snore loudly, or has someone told you that you stop breathing during sleep?", name:'snore',
+      opts:['No','Yes — snoring only','Yes — told I stop breathing','Unknown / sleep alone'], note:'Sleep apnea evaluation, CPAP use, etc.' },
+    { q:'Within 30 minutes of waking, how do you typically feel?', name:'wakestate',
+      opts:['Alert and refreshed','Mildly tired but functional','Very tired / groggy','Exhausted — no better than bedtime'], note:'Morning energy patterns...' },
+    { q:'Do you move, shout, kick, punch, or physically act out dream content while asleep?<br><small style="color:var(--gray-400);font-style:italic">REM Sleep Behavior Disorder — an important neurologic indicator even if infrequent.</small>', name:'rem',
+      opts:['Never','Occasionally','Frequently','Unknown / unsure'], note:'Describe episodes — what happens, how often...' },
+    { q:'Do you nap during the day?', name:'nap',
+      opts:['Never','1–2 times per week','Most days','Every day — feel unable to stay awake'], note:'Duration, time of day, whether intentional...' },
+    { q:'Do you currently use medications or supplements to sleep?', name:'sleepmeds',
+      opts:['No','Yes — over-the-counter','Yes — prescription'], note:'List specific medications and doses if known...' },
+    { q:'Do you use a phone, tablet, or TV screen within 30 minutes of going to sleep?', name:'screens',
+      opts:['Never','Occasionally','Most nights','Every night'], note:'' }
+  ];
+  c.innerHTML = qs.map((q,i) => `
+    <div class="q-block">
+      <span class="q-label"><span class="q-num">${i+1}</span>${q.q}</span>
+      <div class="options-grid">
+        ${q.opts.map((o,j) => `
+          <div class="opt-item">
+            <input type="radio" name="${q.name}" id="${q.name}_${j}">
+            <label for="${q.name}_${j}">${o}</label>
+          </div>`).join('')}
+      </div>
+      <div class="notes-field"><div class="notes-field-label">Notes</div>
+        <textarea class="notes-textarea" placeholder="${q.note || ''}"></textarea>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// METABOLIC section questions
+// ============================================================
+function buildMetaSection() {
+  const c = document.getElementById('metaQs');
+  const qs = [
+    { q:'During a typical week, how many sweetened beverages do you drink?',
+      hint:'Count: soda, sweet tea, sports drinks, juice drinks (including 100% juice), flavored coffee drinks, energy drinks',
+      name:'swbev', opts:['None','1–3 per week','4–7 per week','More than 1 per day'], note:'Which beverages, approximate amounts...' },
+    { q:'How many servings per week of desserts, candy, pastries, or ice cream?',
+      hint:'1 serving = 1 cookie / 1 slice cake / 1 candy bar / 1 scoop ice cream / 1 donut',
+      name:'sweets', opts:['None','1–3 per week','4–7 per week','More than 1 per day'], note:'Specific sweets or patterns...' },
+    { q:'How many servings per week of white bread, pasta, crackers, bagels, or flour-based baked goods?',
+      hint:'1 serving = 1 slice bread / ½ cup cooked pasta / 1 bagel / 1 cup crackers',
+      name:'grains', opts:['0–3 per week','4–7 per week','1–2 per day','More than 2 per day'], note:'Typical grain foods...' },
+    { q:'Within 60–90 minutes after eating, do you feel sleepy or fatigued?',
+      name:'pmfat', opts:['Never','Occasionally','Frequently','After almost every meal'], note:'Does it happen with certain foods more than others?' },
+    { q:'Within 2–3 hours after eating, do you feel the need to eat again, or feel hungry, shaky, or lightheaded?',
+      name:'hunger', opts:['Never','Occasionally','Frequently','Almost always'], note:'Describe what the hunger/shakiness feels like...' },
+    { q:'When you wake in the morning before eating anything, which best describes how you feel?',
+      hint:'This assesses overnight glucose regulation.',
+      name:'morning', opts:['Alert and energetic','Mildly hungry but stable and clear-headed','Weak, shaky, or mentally foggy until I eat','Strong urgency to eat — feel very unwell if delayed'], note:'Describe morning symptoms before eating...' },
+    { q:'Has your waist size increased over the past 5 years?',
+      name:'waist', opts:['No change','Increased 1–2 inches','Increased 3–5 inches','Increased more than 5 inches'], note:'Weight changes, changes in clothing size...' },
+    { q:'How many meals per week come from restaurants, fast food, or pre-packaged prepared foods?',
+      name:'restmeals', opts:['0–2 per week','3–6 per week','7–14 per week','More than 14 per week'], note:'Types of restaurants or packaged foods used regularly...' },
+    { q:'Average alcohol intake per week',
+      hint:'1 drink = 12 oz beer / 5 oz wine / 1.5 oz spirits',
+      name:'alcohol', opts:['None','1–3 drinks per week','4–7 drinks per week','More than 7 per week'], note:'Type of alcohol, patterns of drinking...' }
+  ];
+  c.innerHTML = qs.map((q,i) => `
+    <div class="q-block">
+      <span class="q-label"><span class="q-num">${i+1}</span>${q.q}</span>
+      ${q.hint ? `<div class="q-hint">${q.hint}</div>` : ''}
+      <div class="options-grid${q.name==='morning'?' single-col':''}">
+        ${q.opts.map((o,j) => `
+          <div class="opt-item">
+            <input type="radio" name="${q.name}" id="${q.name}_${j}">
+            <label for="${q.name}_${j}">${o}</label>
+          </div>`).join('')}
+      </div>
+      <div class="notes-field"><div class="notes-field-label">Notes</div>
+        <textarea class="notes-textarea" placeholder="${q.note||''}"></textarea>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// TIMELINE
+// ============================================================
+let eventCount = 0;
+function addTimelineEvent() {
+  eventCount++;
+  const id = eventCount;
+  const opts = eventCategories.map(c => `<option value="${c}">${c}</option>`).join('');
+  document.getElementById('timelineEvents').insertAdjacentHTML('beforeend', `
+    <div class="tl-event-card" id="evt-${id}">
+      <button class="remove-event-btn" onclick="document.getElementById('evt-${id}').remove()" title="Remove">×</button>
+      <div class="tl-event-grid">
+        <div>
+          <label>Event Category <span class="req">*</span></label>
+          <select name="evt_cat_${id}"><option value="">— Select —</option>${opts}</select>
+        </div>
+        <div>
+          <label>Event Description <span class="req">*</span></label>
+          <input type="text" name="evt_desc_${id}" placeholder="e.g. Mono / EBV infection, concussion playing football">
+        </div>
+      </div>
+      <div class="tl-year-age">
+        <div>
+          <label>Approximate Year <em style="font-weight:normal;font-style:italic;text-transform:none">(at least one required)</em></label>
+          <input type="number" name="evt_year_${id}" placeholder="e.g. 1998" min="1920" max="2030">
+        </div>
+        <div>
+          <label>Your Age at the Time <em style="font-weight:normal;font-style:italic;text-transform:none">(optional if year provided)</em></label>
+          <input type="number" name="evt_age_${id}" placeholder="e.g. 24" min="0" max="110">
+        </div>
+        <div class="tl-year-age-note">Fill in at least one of Year or Age — both is ideal if you remember.</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-top:10px">
+        <label style="font-size:13px;font-weight:600;color:var(--gray-600);display:flex;align-items:center;gap:6px;margin-top:4px">
+          <input type="checkbox" name="evt_ongoing_${id}"> Still ongoing / present
+        </label>
+        <div style="flex:1;min-width:200px">
+          <label style="font-size:12px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px">Notes</label>
+          <input type="text" name="evt_note_${id}" placeholder="Any relevant details about this event...">
+        </div>
+      </div>
+    </div>`);
+}
+
+// ============================================================
+// NAVIGATION — slider-based
+// ============================================================
+const TOTAL_SECTIONS = 13;
+let currentSection = 1;
+
+const sectionNames = [
+  'Patient Information',
+  'Cognitive Symptoms',
+  'Daily Function',
+  'Sleep Physiology',
+  'Metabolic Health',
+  'Gut & Digestion',
+  'Toxin Exposure',
+  'Infections & Immune',
+  'Hormonal Factors',
+  'Vascular & Neuro',
+  'Stress & Medications',
+  'Lifestyle & Timeline',
+  'Movement & Motor'
+];
+
+function updateNav() {
+  const slider  = document.getElementById('sectionSlider');
+  const nameEl  = document.getElementById('navSectionName');
+  const counter = document.getElementById('navCounter');
+  const ticks   = document.querySelectorAll('.nav-tick');
+
+  if (slider) {
+    slider.value = currentSection;
+    const pct = ((currentSection - 1) / (TOTAL_SECTIONS - 1) * 100).toFixed(1);
+    slider.style.setProperty('--pct', pct + '%');
+  }
+  if (nameEl)  nameEl.textContent  = sectionNames[currentSection - 1];
+  if (counter) counter.textContent = `${currentSection} of ${TOTAL_SECTIONS}`;
+
+  ticks.forEach((t, i) => {
+    t.classList.remove('active', 'done');
+    if (i + 1 === currentSection) t.classList.add('active');
+    else if (i + 1 < currentSection) t.classList.add('done');
+  });
+
+  document.getElementById('btnPrev').style.visibility = currentSection === 1 ? 'hidden' : 'visible';
+  document.getElementById('mainNavBar').style.display  = currentSection === TOTAL_SECTIONS ? 'none' : 'flex';
+}
+
+function sliderNavigate(val) {
+  const next = parseInt(val);
+  if (next === currentSection) return;
+  document.getElementById('sec-' + currentSection).classList.remove('active');
+  currentSection = next;
+  document.getElementById('sec-' + currentSection).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateNav();
+}
+
+function changeSection(dir) {
+  const next = currentSection + dir;
+  if (next < 1 || next > TOTAL_SECTIONS) return;
+  sliderNavigate(next);
+}
+
+function submitForm() {
+  try {
+    document.getElementById('sec-13').classList.remove('active');
+    document.getElementById('completionCard').classList.add('active');
+    document.getElementById('mainNavBar').style.display='none';
+    document.getElementById('progressFill').style.width='100%';
+    document.getElementById('progressLabel').textContent='Intake Complete';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } catch(e) {
+    console.error('submitForm error:', e);
+  }
+
+  // Send email in background — wrapped separately so any failure is isolated
+  setTimeout(() => {
+    try { sendIntakeEmail(); } catch(e) { console.error('Email error:', e); }
+  }, 500);
+}
+
+// ============================================================
+// EMAILJS — send intake to practice on submit
+// ============================================================
+const EMAILJS_PUBLIC_KEY  = 'lrJntAFJX1a0wdsbl';
+const EMAILJS_SERVICE_ID  = 'service_6ov5feq';
+const EMAILJS_TEMPLATE_ID = 'template_erwp7rr';
+
+function buildSummaryText() {
+  const lines = [];
+  for (let s = 1; s <= 13; s++) {
+    const sec = document.getElementById('sec-' + s);
+    if (!sec) continue;
+    const secItems = [];
+    sec.querySelectorAll('input, select, textarea').forEach(el => {
+      let val = '';
+      if (el.type === 'radio')    { if (!el.checked) return; val = el.closest('label')?.textContent?.trim() || el.value; }
+      else if (el.type === 'checkbox') { if (!el.checked) return; val = el.closest('label')?.textContent?.trim() || 'Yes'; }
+      else if (el.tagName === 'SELECT') { val = el.options[el.selectedIndex]?.text || ''; if (!val || val === '—' || val === '— Select —') return; }
+      else { val = el.value?.trim(); if (!val) return; }
+      if (val) {
+        const lbl = el.labels?.[0]?.textContent?.trim() || el.placeholder || el.name || '';
+        if (lbl) secItems.push('  ' + lbl.substring(0,60) + ': ' + val.substring(0,120));
+      }
+    });
+    if (secItems.length > 0) {
+      lines.push('\n=== ' + sectionNames[s-1].toUpperCase() + ' ===');
+      lines.push(...secItems);
+    }
+  }
+  return lines.join('\n');
+}
+
+function buildChiefComplaint() {
+  const checked = [];
+  document.querySelectorAll('#sec-1 input[type=checkbox]:checked').forEach(el => {
+    const lbl = el.closest('label')?.textContent?.trim();
+    if (lbl) checked.push('• ' + lbl);
+  });
+  return checked.join('\n') || 'Not specified';
+}
+
+function buildChiefComplaintShort() {
+  const checked = [];
+  document.querySelectorAll('#sec-1 input[type=checkbox]:checked').forEach(el => {
+    const lbl = el.closest('label')?.textContent?.trim();
+    if (lbl) checked.push(lbl.split('—')[0].trim().split(' ').slice(0,4).join(' '));
+  });
+  if (checked.length === 0) return 'No concerns selected';
+  if (checked.length <= 2) return checked.join(', ');
+  return checked.slice(0,2).join(', ') + ' +' + (checked.length - 2) + ' more';
+}
+
+function buildSummaryText() {
+  const lines = [];
+  for (let s = 1; s <= 13; s++) {
+    const sec = document.getElementById('sec-' + s);
+    if (!sec) continue;
+    const secItems = [];
+    sec.querySelectorAll('input, select, textarea').forEach(el => {
+      let val = '';
+      if (el.type === 'radio')    { if (!el.checked) return; val = el.closest('label')?.textContent?.trim() || el.value; }
+      else if (el.type === 'checkbox') { if (!el.checked) return; val = el.closest('label')?.textContent?.trim() || 'Yes'; }
+      else if (el.tagName === 'SELECT') { val = el.options[el.selectedIndex]?.text || ''; if (!val || val === '—' || val === '— Select —') return; }
+      else { val = el.value?.trim(); if (!val) return; }
+      if (val) {
+        const lbl = el.labels?.[0]?.textContent?.trim() || el.placeholder || el.name || '';
+        if (lbl) secItems.push('  ' + lbl.substring(0,60) + ': ' + val.substring(0,120));
+      }
+    });
+    if (secItems.length > 0) {
+      lines.push('');
+      lines.push('── ' + sectionNames[s-1].toUpperCase() + ' ──────────────────');
+      lines.push(...secItems);
+    }
+  }
+  return lines.join('\n') || 'No responses recorded.';
+}
+
+function sendIntakeEmail() {
+  try {
+    const status = document.getElementById('pdfStatus');
+
+    if (typeof emailjs === 'undefined') {
+      if (status) {
+        status.textContent = 'Note: automatic email requires an internet connection. Please download the Practice Copy PDF and email it to your practice.';
+        status.style.color = '#c0392b';
+      }
+      return;
+    }
+
+    if (status) {
+      status.textContent = 'Sending intake to practice...';
+      status.style.color = '#2a7d6e';
+    }
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    const firstName = document.querySelector('input[placeholder="First name"]')?.value?.trim() || '';
+    const lastName  = document.querySelector('input[placeholder="Last name"]')?.value?.trim() || '';
+    const dob       = document.getElementById('dob')?.value || '';
+    const dos       = document.getElementById('today')?.value || new Date().toLocaleDateString();
+    const phone     = document.querySelector('input[type="tel"]')?.value?.trim() || '';
+    const email     = document.querySelector('input[type="email"]')?.value?.trim() || '';
+
+    let summary = buildSummaryText();
+    if (summary.length > 40000) summary = summary.substring(0, 40000) + '\n\n[Summary truncated — download Practice Copy PDF for full responses]';
+
+    const params = {
+      patient_name:          (firstName + ' ' + lastName).trim() || 'Unknown',
+      dob:                   dob || 'Not provided',
+      dos:                   dos,
+      phone:                 phone || 'Not provided',
+      patient_email:         email || 'Not provided',
+      chief_complaint:       buildChiefComplaint(),
+      chief_complaint_short: buildChiefComplaintShort(),
+      full_summary:          summary,
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(() => {
+        const st = document.getElementById('pdfStatus');
+        if (st) {
+          st.textContent = '✓ Intake emailed to practice successfully.';
+          st.style.color = '#2a7d6e';
+          setTimeout(() => { st.textContent = ''; }, 8000);
+        }
+      })
+      .catch(err => {
+        console.error('EmailJS send error:', err);
+        const st = document.getElementById('pdfStatus');
+        if (st) {
+          st.textContent = 'Email send failed (' + (err.text || err.status || JSON.stringify(err)) + '). Please download the Practice Copy PDF and email it manually.';
+          st.style.color = '#c0392b';
+        }
+      });
+
+  } catch(e) {
+    console.error('sendIntakeEmail exception:', e);
+    const st = document.getElementById('pdfStatus');
+    if (st) {
+      st.textContent = 'Email could not be sent automatically. Please download the Practice Copy PDF and email it to health@dudleychiro.com';
+      st.style.color = '#c0392b';
+    }
+  }
+}
+
+// ============================================================
+// SECTION 13 — fine motor scale + dopamine blocker expand
+// ============================================================
+const fineMotorItems = [
+  'Buttoning a shirt or jacket',
+  'Turning a key in a lock',
+  'Typing on a keyboard or phone',
+  'Picking up small objects (coins, pills, pins)',
+  'Cutting food with a knife',
+  'Handwriting legibly'
+];
+
+function buildFineMotorScale() {
+  renderScale('fineMotorScale', fineMotorItems, ['Never','Occ.','Freq.','Almost always'], 'fm');
+}
+
+function buildDopBlockExpand(show) {
+  const c = document.getElementById('dopBlockDetail');
+  if (!c) return;
+  if (!show) { c.innerHTML = ''; return; }
+  c.innerHTML = `
+    <div class="expand-panel open" style="margin-top:10px">
+      <div class="expand-panel-label">List the dopamine-blocking medication(s)</div>
+      <div id="dopBlockList">
+        <div class="expand-row cols-2">
+          <div><span class="expand-row-label">Medication name</span><input type="text" placeholder="e.g. Reglan, Risperdal, Haldol" name="dop_name_1"></div>
+          <div><span class="expand-row-label">Approx. duration taken</span><input type="text" placeholder="e.g. 6 months in 2019, still taking" name="dop_dur_1"></div>
+          <button type="button" class="remove-row-btn" style="display:none">×</button>
+        </div>
+      </div>
+      <button type="button" class="add-row-btn" onclick="addMedRow('dopBlockList','dop')" style="margin-top:6px">+ Add another</button>
+    </div>`;
+}
+
+// ============================================================
+// INIT — call all builders
+// ============================================================
+(function init() {
+  // build nav ticks
+  const ticksC = document.getElementById('navTicks');
+  for (let i = 1; i <= TOTAL_SECTIONS; i++) {
+    const t = document.createElement('div');
+    t.className = 'nav-tick' + (i === 1 ? ' active' : '');
+    t.title = sectionNames[i - 1];
+    t.innerHTML = `<div class="nav-tick-dot"></div><div class="nav-tick-num">${i}</div>`;
+    t.onclick = () => sliderNavigate(i);
+    ticksC.appendChild(t);
+  }
+
+  // set today's date
+  document.getElementById('today').valueAsDate = new Date();
+
+  // render scales
+  renderScale('memScale',   memItems,   freqLabels, 'mem');
+  renderScale('langScale',  langItems,  freqLabels, 'lang');
+  renderScale('orientScale',orientItems,freqLabels, 'orient');
+  renderScale('funcScale',  funcItems,  funcLabels, 'func');
+
+  // render dynamic sections
+  buildSleepSection();
+  buildMetaSection();
+
+  // timeline-linked checkbox lists (date pill only)
+  renderTLList('metaDxList', metaDxItems, 'metadx');
+  renderTLList('psychList',  psychItems,  'psych');
+
+  // clinical lists (date pill + sub-fields)
+  renderClinicalList('gutHxList',   gutHxGroups);
+  renderClinicalList('infectList',  infectGroups);
+  renderClinicalList('autoimList',  autoimGroups);
+  renderClinicalList('vascDxList',  vascGroups);
+
+  // expandable groups
+  renderExpandableGroups('toxExpList',  toxExpGroups,  'exposure');
+  renderExpandableGroups('cogMedsList', cogMedGroups,  'med');
+
+  // family history
+  buildFamHx();
+
+  // seed med/supp lists with one blank row
+  addGenericMed('rxList','rx');
+  addGenericMed('suppList','supp');
+
+  // one blank timeline event
+  addTimelineEvent();
+
+  // section 13 — motor section
+  buildFineMotorScale();
+
+  updateNav();
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ============================================================
+// PDF GENERATION ENGINE
+// ============================================================
+
+// --- Helper: collect all form data into a structured object ---
+function collectFormData() {
+  const data = { patient:{}, sections:[] };
+
+  // Patient identifiers
+  data.patient.name   = (document.querySelector('input[placeholder="First name"]')?.value || '') + ' ' +
+                        (document.querySelector('input[placeholder="Last name"]')?.value || '');
+  data.patient.dob    = document.getElementById('dob')?.value || '';
+  data.patient.date   = document.getElementById('today')?.value || new Date().toLocaleDateString();
+  data.patient.phone  = document.querySelector('input[type="tel"]')?.value || '';
+  data.patient.email  = document.querySelector('input[type="email"]')?.value || '';
+  data.patient.name   = data.patient.name.trim() || 'Patient';
+
+  // Iterate each section
+  for (let s = 1; s <= 13; s++) {
+    const sec = document.getElementById('sec-' + s);
+    if (!sec) continue;
+    const secName = sectionNames[s - 1];
+    const items = [];
+
+    // Collect all answered inputs in this section
+    sec.querySelectorAll('input, select, textarea').forEach(el => {
+      if (!el.name && !el.id) return;
+      const label = getLabel(el);
+      if (!label) return;
+
+      let val = '';
+      if (el.type === 'radio') {
+        if (!el.checked) return;
+        val = el.parentElement?.textContent?.trim() || el.value;
+      } else if (el.type === 'checkbox') {
+        if (!el.checked) return;
+        val = el.parentElement?.textContent?.trim() || 'Yes';
+      } else if (el.tagName === 'SELECT') {
+        val = el.options[el.selectedIndex]?.text || '';
+        if (!val || val === '—' || val === '— Select —') return;
+      } else {
+        val = el.value?.trim();
+        if (!val) return;
+      }
+      if (val) items.push({ label, val });
+    });
+
+    if (items.length > 0) {
+      data.sections.push({ name: secName, num: s, items });
+    }
+  }
+
+  return data;
+}
+
+function getLabel(el) {
+  // Try: name attr → aria-label → nearest label → parent q-label text → placeholder
+  if (el.type === 'radio' || el.type === 'checkbox') {
+    const lbl = el.closest('label') || el.closest('.opt-item')?.querySelector('label');
+    return lbl ? lbl.textContent.trim().replace(/\s+/g,' ') : null;
+  }
+  if (el.labels && el.labels.length > 0) return el.labels[0].textContent.trim();
+  if (el.getAttribute('aria-label')) return el.getAttribute('aria-label');
+  // Walk up to find a q-label
+  let p = el.parentElement;
+  for (let i = 0; i < 6 && p; i++) {
+    const ql = p.querySelector('.q-label, .q-num + *');
+    if (ql) return ql.textContent.replace(/[0-9]+$/,'').trim().substring(0, 80);
+    p = p.parentElement;
+  }
+  return el.placeholder || el.name || null;
+}
+
+// --- Clinical domain mapping ---
+const domainMap = {
+  'Metabolic':    [5],
+  'Inflammatory': [8],
+  'Gut':          [6],
+  'Trophic':      [9],
+  'Toxic':        [7],
+  'Vascular':     [10],
+  'Sleep':        [4],
+  'Traumatic':    [10],
+  'PD / Motor':   [13],
+  'Stress':       [11],
+  'Cognitive':    [2, 3],
+  'Lifestyle':    [12],
+};
+
+// ============================================================
+// PDF WRITER — shared rendering engine
+// ============================================================
+function makePDF(type) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const W = 612, H = 792;
+  const ML = 48, MR = 48, MT = 48;
+  const contentW = W - ML - MR;
+  let y = MT;
+
+  const navy  = [26, 39, 68];
+  const teal  = [42, 125, 110];
+  const amber = [194, 123, 10];
+  const gray6 = [92, 90, 85];
+  const gray2 = [232, 230, 224];
+  const white = [255, 255, 255];
+  const red   = [192, 57, 43];
+
+  const data = collectFormData();
+
+  function checkY(needed) {
+    if (y + needed > H - 48) {
+      doc.addPage();
+      y = MT;
+      drawPageHeader();
+    }
+  }
+
+  function drawPageHeader() {
+    doc.setFillColor(...navy);
+    doc.rect(0, 0, W, 36, 'F');
+    doc.setTextColor(...white);
+    doc.setFontSize(9);
+    doc.setFont('helvetica','bold');
+    doc.text('Dudley Chiropractic, Acupuncture and Functional Medicine', ML, 14);
+    doc.setFont('helvetica','normal');
+    doc.text('Neurocognitive Health Assessment  |  ' + typeLabel, ML, 26);
+    // right side: patient + date
+    const ptLine = (data.patient.name || '') + '  |  DOB: ' + (data.patient.dob || '') + '  |  Date: ' + (data.patient.date || '');
+    doc.text(ptLine, W - MR, 26, { align:'right' });
+    y = 52;
+  }
+
+  const typeLabel = type === 'patient' ? 'Patient Summary' :
+                    type === 'practice' ? 'Complete Practice Copy' : 'Clinical Domain Summary';
+
+  // ---- COVER BLOCK ----
+  doc.setFillColor(...navy);
+  doc.rect(0, 0, W, 80, 'F');
+  doc.setTextColor(...white);
+  doc.setFontSize(20);
+  doc.setFont('helvetica','bold');
+  doc.text('Neurocognitive Health Assessment', ML, 32);
+  doc.setFontSize(12);
+  doc.setFont('helvetica','normal');
+  doc.text(typeLabel, ML, 50);
+  doc.setFontSize(9);
+  doc.text('Dudley Chiropractic, Acupuncture and Functional Medicine', ML, 65);
+
+  y = 96;
+
+  // ---- PATIENT INFO BOX ----
+  doc.setFillColor(238, 247, 245);
+  doc.roundedRect(ML, y, contentW, 52, 4, 4, 'F');
+  doc.setTextColor(...navy);
+  doc.setFontSize(10);
+  doc.setFont('helvetica','bold');
+  doc.text('Patient: ' + (data.patient.name || '—'), ML + 10, y + 16);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...gray6);
+  doc.text('Date of Birth: ' + (data.patient.dob || '—'), ML + 10, y + 30);
+  doc.text('Date Completed: ' + (data.patient.date || '—'), ML + 10, y + 42);
+  if (data.patient.phone) doc.text('Phone: ' + data.patient.phone, ML + 200, y + 30);
+  if (data.patient.email) doc.text('Email: ' + data.patient.email, ML + 200, y + 42);
+  y += 66;
+
+  // ---- CONTENT by type ----
+  if (type === 'patient') {
+    renderPatientFormat(doc, data, { y, W, ML, MR, MT, contentW, navy, teal, gray6, gray2, white, checkY, drawPageHeader });
+  } else if (type === 'practice') {
+    renderPracticeFormat(doc, data, { y, W, ML, MR, MT, contentW, navy, teal, gray6, gray2, white, checkY, drawPageHeader });
+  } else {
+    renderClinicalFormat(doc, data, { y, W, ML, MR, MT, contentW, navy, teal, amber, gray6, gray2, white, red, checkY, drawPageHeader });
+  }
+
+  // Page numbers
+  const pageCount = doc.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setTextColor(160, 158, 152);
+    doc.text('Page ' + i + ' of ' + pageCount, W / 2, H - 20, { align: 'center' });
+    doc.text('CONFIDENTIAL — Patient Health Record', W - MR, H - 20, { align: 'right' });
+  }
+
+  return doc;
+}
+
+// ============================================================
+// FORMAT 1 — PATIENT SUMMARY (answered items only, clean prose)
+// ============================================================
+function renderPatientFormat(doc, data, ctx) {
+  let { y } = ctx;
+  const { W, ML, contentW, navy, teal, gray6, gray2, white, checkY, drawPageHeader } = ctx;
+
+  // Intro note
+  doc.setFontSize(9);
+  doc.setFont('helvetica','italic');
+  doc.setTextColor(...gray6);
+  const intro = 'This is a summary of the responses you provided on your intake form. Please review for accuracy and bring this copy to your appointment.';
+  const introLines = doc.splitTextToSize(intro, contentW);
+  introLines.forEach(line => { checkY(14); doc.text(line, ML, y); y += 13; });
+  y += 8;
+
+  data.sections.forEach(sec => {
+    checkY(30);
+    // Section header bar
+    doc.setFillColor(...teal);
+    doc.rect(ML, y, contentW, 20, 'F');
+    doc.setTextColor(...white);
+    doc.setFontSize(10);
+    doc.setFont('helvetica','bold');
+    doc.text('Section ' + sec.num + ' — ' + sec.name, ML + 8, y + 13);
+    y += 26;
+
+    sec.items.forEach(item => {
+      checkY(28);
+      // Label
+      doc.setFontSize(8);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...navy);
+      const labelLines = doc.splitTextToSize(item.label, contentW - 20);
+      labelLines.forEach(line => { checkY(12); doc.text(line, ML + 6, y); y += 11; });
+      // Value
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(...gray6);
+      const valLines = doc.splitTextToSize(item.val, contentW - 24);
+      valLines.forEach(line => { checkY(12); doc.text(line, ML + 14, y); y += 11; });
+      y += 3;
+    });
+    y += 8;
+  });
+  return y;
+}
+
+// ============================================================
+// FORMAT 2 — PRACTICE COPY (all sections, full detail, table layout)
+// ============================================================
+function renderPracticeFormat(doc, data, ctx) {
+  let { y } = ctx;
+  const { W, ML, contentW, navy, teal, gray6, gray2, white, checkY, drawPageHeader } = ctx;
+
+  doc.setFontSize(9);
+  doc.setFont('helvetica','italic');
+  doc.setTextColor(...gray6);
+  doc.text('Complete patient intake responses — all answered fields included.', ML, y);
+  y += 18;
+
+  data.sections.forEach(sec => {
+    checkY(30);
+    // Section header
+    doc.setFillColor(...navy);
+    doc.rect(ML, y, contentW, 22, 'F');
+    doc.setTextColor(...white);
+    doc.setFontSize(11);
+    doc.setFont('helvetica','bold');
+    doc.text('§' + sec.num + '  ' + sec.name, ML + 8, y + 14);
+    y += 28;
+
+    // Items in two-column layout for space efficiency
+    const half = contentW / 2 - 8;
+    let col = 0;
+    let rowY = y;
+    let maxRowH = 0;
+
+    sec.items.forEach((item, idx) => {
+      const x = col === 0 ? ML : ML + contentW / 2 + 4;
+
+      // Measure height needed
+      doc.setFontSize(8);
+      const lLines = doc.splitTextToSize(item.label.substring(0,80), half - 4);
+      const vLines = doc.splitTextToSize(item.val.substring(0,120), half - 8);
+      const needed = (lLines.length + vLines.length) * 11 + 8;
+
+      if (col === 0 && rowY + needed > 792 - 48) {
+        doc.addPage(); rowY = 52; y = rowY; drawPageHeader();
+      }
+
+      // Label
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...navy);
+      let ly = rowY;
+      lLines.forEach(line => { doc.text(line, x + 4, ly + 10); ly += 11; });
+
+      // Value
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(...gray6);
+      vLines.forEach(line => { doc.text(line, x + 8, ly + 10); ly += 11; });
+
+      const cellH = needed;
+      maxRowH = Math.max(maxRowH, cellH);
+
+      // Light divider between items
+      doc.setDrawColor(...gray2);
+      doc.setLineWidth(0.3);
+      doc.line(x, rowY + cellH + 2, x + half, rowY + cellH + 2);
+
+      col++;
+      if (col === 2) {
+        rowY += maxRowH + 6;
+        maxRowH = 0;
+        col = 0;
+      }
+    });
+
+    if (col !== 0) rowY += maxRowH + 6;
+    y = rowY + 12;
+  });
+  return y;
+}
+
+// ============================================================
+// FORMAT 3 — CLINICAL DOMAIN SUMMARY (grouped by driver)
+// ============================================================
+function renderClinicalFormat(doc, data, ctx) {
+  let { y } = ctx;
+  const { W, ML, contentW, navy, teal, amber, gray6, gray2, white, red, checkY, drawPageHeader } = ctx;
+
+  // Intro
+  doc.setFontSize(9);
+  doc.setFont('helvetica','italic');
+  doc.setTextColor(...gray6);
+  const intro = 'Responses organized by functional medicine driver category. For physician review and domain scoring before the consultation.';
+  const iLines = doc.splitTextToSize(intro, contentW);
+  iLines.forEach(l => { doc.text(l, ML, y); y += 13; });
+  y += 6;
+
+  // Quick-reference flags at top
+  const flagItems = [];
+  const reasonEl = document.querySelectorAll('#completionCard ~ * .opt-item input:checked, .section input:checked');
+  // Collect checked reason-for-visit items
+  document.querySelectorAll('#sec-1 input[type=checkbox]:checked').forEach(el => {
+    const lbl = el.parentElement?.textContent?.trim();
+    if (lbl) flagItems.push(lbl);
+  });
+
+  if (flagItems.length > 0) {
+    checkY(40);
+    doc.setFillColor(253, 236, 234);
+    doc.roundedRect(ML, y, contentW, 12 + flagItems.length * 12, 3, 3, 'F');
+    doc.setDrawColor(...red);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(ML, y, contentW, 12 + flagItems.length * 12, 3, 3, 'S');
+    doc.setFontSize(9);
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(...red);
+    doc.text('Reason for Visit', ML + 8, y + 10);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(146, 35, 35);
+    flagItems.forEach((f, i) => {
+      doc.text('• ' + f.substring(0, 90), ML + 8, y + 22 + i * 12);
+    });
+    y += 20 + flagItems.length * 12;
+    y += 10;
+  }
+
+  // Render by domain
+  Object.entries(domainMap).forEach(([domain, secNums]) => {
+    const domainSecs = data.sections.filter(s => secNums.includes(s.num));
+    const allItems = domainSecs.flatMap(s => s.items);
+    if (allItems.length === 0) return;
+
+    checkY(36);
+
+    // Domain header
+    const headerColor = domain === 'Cognitive' ? teal :
+                        domain === 'PD / Motor' ? [90, 61, 176] :
+                        domain === 'Metabolic'  ? [26, 122, 74] :
+                        domain === 'Toxic'      ? red :
+                        domain === 'Vascular'   ? [26, 95, 168] :
+                        domain === 'Sleep'      ? [90, 61, 176] :
+                        amber;
+
+    doc.setFillColor(...headerColor);
+    doc.rect(ML, y, contentW, 20, 'F');
+    doc.setTextColor(...white);
+    doc.setFontSize(10);
+    doc.setFont('helvetica','bold');
+    const secLabel = domainSecs.map(s => '§' + s.num + ' ' + s.name).join('  ·  ');
+    doc.text(domain + '  ·  ' + secLabel, ML + 8, y + 13);
+    y += 26;
+
+    allItems.forEach(item => {
+      checkY(24);
+      doc.setFontSize(8);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...navy);
+      const lLines = doc.splitTextToSize(item.label.substring(0, 90), contentW - 20);
+      lLines.forEach(line => { checkY(12); doc.text(line, ML + 6, y); y += 11; });
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(...gray6);
+      const vLines = doc.splitTextToSize(item.val.substring(0, 150), contentW - 24);
+      vLines.forEach(line => { checkY(12); doc.text(line, ML + 14, y); y += 11; });
+      // subtle divider
+      doc.setDrawColor(...gray2);
+      doc.setLineWidth(0.3);
+      doc.line(ML + 6, y + 1, ML + contentW - 6, y + 1);
+      y += 5;
+    });
+    y += 12;
+  });
+  return y;
+}
+
+// ============================================================
+// MAIN ENTRY POINT
+// ============================================================
+function generatePDF(type) {
+  const status = document.getElementById('pdfStatus');
+  status.textContent = 'Generating PDF...';
+
+  try {
+    const doc = makePDF(type);
+    const patName = (document.querySelector('input[placeholder="First name"]')?.value || 'Patient').trim();
+    const dateStr = new Date().toISOString().split('T')[0];
+    const filename = patName.replace(/\s+/g,'_') + '_NeuroCog_' + type + '_' + dateStr + '.pdf';
+    doc.save(filename);
+    status.textContent = '✓ ' + filename + ' downloaded.';
+    setTimeout(() => { status.textContent = ''; }, 5000);
+  } catch(e) {
+    console.error(e);
+    status.textContent = 'Error generating PDF. Please try the Print / Save as PDF option in your browser.';
+  }
+}
+</script>
+</body>
+</html>
