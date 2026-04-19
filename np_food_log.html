@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>4-Day Food Log</title>
+<title>DCA + FM — 4-Day Food Log</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
@@ -34,7 +34,7 @@
   .app-header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 1.25rem 1.25rem 1rem;
+    padding: 1rem 1.25rem 1rem;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -45,8 +45,25 @@
     justify-content: space-between;
     margin-bottom: 1rem;
   }
-  .app-title { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
-  .app-subtitle { font-size: 12px; color: var(--text-3); margin-top: 2px; font-family: 'DM Mono', monospace; }
+  .brand-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .brand-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    background: var(--text);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .brand-sep { font-size: 11px; color: var(--text-3); }
+  .app-title { font-size: 16px; font-weight: 500; letter-spacing: -0.02em; }
+  .app-subtitle { font-size: 11px; color: var(--text-3); font-family: 'DM Mono', monospace; }
   .summary-btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
@@ -59,17 +76,12 @@
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .summary-btn:hover { background: var(--surface2); color: var(--text); }
 
   /* Day tabs */
-  .day-tabs {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    scrollbar-width: none;
-  }
+  .day-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
   .day-tabs::-webkit-scrollbar { display: none; }
   .day-tab {
     font-family: 'DM Sans', sans-serif;
@@ -78,148 +90,134 @@
     border-radius: 20px;
     border: 1px solid var(--border);
     font-size: 13px;
-    font-weight: 400;
     cursor: pointer;
     background: var(--surface2);
     color: var(--text-2);
     transition: all 0.15s;
   }
-  .day-tab.active {
-    background: var(--text);
-    color: #fff;
-    border-color: var(--text);
-    font-weight: 500;
-  }
+  .day-tab.active { background: var(--text); color: #fff; border-color: var(--text); font-weight: 500; }
 
   /* Content */
   .content { padding: 1.25rem; }
 
-  /* Meal section */
-  .meal-section { margin-bottom: 1rem; }
-  .meal-card {
+  /* Patient card */
+  .patient-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
+    padding: 14px;
+    margin-bottom: 1.25rem;
   }
-  .meal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .meal-name { font-size: 13px; font-weight: 500; }
-  .meal-kcal {
+  .section-title {
+    font-size: 10px;
     font-family: 'DM Mono', monospace;
-    font-size: 12px;
     color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
   }
-  .add-btn {
-    width: 26px; height: 26px;
-    border-radius: 50%;
+  .patient-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .p-field { display: flex; flex-direction: column; gap: 3px; }
+  .p-field.full { grid-column: 1 / -1; }
+  .p-field label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text-3); }
+  .p-field input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
     border: 1px solid var(--border-med);
+    border-radius: var(--radius-sm);
+    padding: 7px 9px;
     background: var(--surface2);
-    color: var(--text-2);
-    font-size: 17px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-    margin-left: 8px;
+    color: var(--text);
+    width: 100%;
+  }
+  .p-field input:focus { outline: none; border-color: var(--text); background: var(--surface); }
+
+  /* Meal section */
+  .meal-section { margin-bottom: 1rem; }
+  .meal-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .meal-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .meal-name { font-size: 13px; font-weight: 500; }
+  .meal-kcal { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-3); }
+  .add-btn {
+    width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border-med);
+    background: var(--surface2); color: var(--text-2); font-size: 17px; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; margin-left: 8px;
   }
   .add-btn:hover { background: var(--text); color: #fff; border-color: var(--text); }
 
   /* Entries */
   .entry-list { padding: 4px 0; }
-  .entry-row {
-    display: flex;
-    align-items: center;
-    padding: 7px 14px;
-    border-bottom: 1px solid var(--border);
-  }
+  .entry-row { display: flex; align-items: center; padding: 7px 14px; border-bottom: 1px solid var(--border); }
   .entry-row:last-child { border-bottom: none; }
   .entry-info { flex: 1; min-width: 0; }
   .entry-food { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .entry-qty { font-size: 11px; color: var(--text-3); margin-top: 1px; font-family: 'DM Mono', monospace; }
-  .entry-cals {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--text-2);
-    margin-left: 8px;
-    white-space: nowrap;
-  }
-  .del-btn {
-    background: none; border: none; cursor: pointer;
-    color: var(--text-3); font-size: 13px; padding: 0 0 0 8px;
-    transition: color 0.15s;
-  }
+  .entry-cals { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-2); margin-left: 8px; white-space: nowrap; }
+  .del-btn { background: none; border: none; cursor: pointer; color: var(--text-3); font-size: 13px; padding: 0 0 0 8px; transition: color 0.15s; }
   .del-btn:hover { color: var(--red); }
 
-  /* Add panel */
-  .add-panel {
-    border-top: 1px solid var(--border);
+  /* Per-meal symptoms */
+  .symptom-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 10px 14px;
     background: var(--surface2);
+    border-top: 1px solid var(--border);
   }
-  .mode-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border);
+  .sym-field { display: flex; flex-direction: column; gap: 3px; }
+  .sym-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text-3); }
+  .sym-select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    border: 1px solid var(--border-med);
+    border-radius: var(--radius-sm);
+    padding: 5px 6px;
+    background: var(--surface);
+    color: var(--text);
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 100%;
   }
+  .sym-select:focus { outline: none; border-color: var(--text); }
+  .sym-select.empty { color: var(--text-3); }
+
+  /* Add panel */
+  .add-panel { border-top: 1px solid var(--border); background: var(--surface2); }
+  .mode-tabs { display: flex; border-bottom: 1px solid var(--border); }
   .mode-tab {
     font-family: 'DM Sans', sans-serif;
-    flex: 1;
-    padding: 9px 4px;
-    font-size: 12px;
-    text-align: center;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: var(--text-3);
-    border-right: 1px solid var(--border);
-    transition: all 0.15s;
-    font-weight: 400;
+    flex: 1; padding: 9px 4px; font-size: 12px; text-align: center;
+    cursor: pointer; background: none; border: none; color: var(--text-3);
+    border-right: 1px solid var(--border); transition: all 0.15s;
   }
   .mode-tab:last-child { border-right: none; }
   .mode-tab.active { background: var(--surface); color: var(--text); font-weight: 500; }
   .mode-tab:hover:not(.active) { color: var(--text-2); }
-
   .add-body { padding: 12px 14px; }
 
   /* AI mode */
   .ai-hint { font-size: 11px; color: var(--text-3); margin-bottom: 10px; line-height: 1.5; }
   .ai-row { display: flex; gap: 8px; margin-bottom: 8px; }
   .ai-input {
-    font-family: 'DM Sans', sans-serif;
-    flex: 1;
-    font-size: 13px;
-    border: 1px solid var(--border-med);
-    border-radius: var(--radius-sm);
-    padding: 8px 10px;
-    background: var(--surface);
-    color: var(--text);
+    font-family: 'DM Sans', sans-serif; flex: 1; font-size: 13px;
+    border: 1px solid var(--border-med); border-radius: var(--radius-sm);
+    padding: 8px 10px; background: var(--surface); color: var(--text);
   }
   .ai-input:focus { outline: none; border-color: var(--text); }
   .estimate-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1px solid var(--border-med);
-    border-radius: var(--radius-sm);
-    padding: 8px 14px;
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border-med); border-radius: var(--radius-sm);
+    padding: 8px 14px; background: var(--surface); color: var(--text);
+    cursor: pointer; white-space: nowrap; transition: all 0.15s;
   }
   .estimate-btn:hover:not(:disabled) { background: var(--text); color: #fff; border-color: var(--text); }
   .estimate-btn:disabled { opacity: 0.45; cursor: default; }
   .ai-result {
-    padding: 10px 12px;
-    background: var(--green-light);
-    border-radius: var(--radius-sm);
-    margin-bottom: 10px;
-    border: 1px solid rgba(45,106,79,0.2);
+    padding: 10px 12px; background: var(--green-light); border-radius: var(--radius-sm);
+    margin-bottom: 10px; border: 1px solid rgba(45,106,79,0.2);
   }
   .ai-result-food { font-size: 13px; font-weight: 500; color: var(--green); }
   .ai-result-detail { font-size: 11px; color: var(--green); opacity: 0.8; margin-top: 2px; font-family: 'DM Mono', monospace; }
@@ -228,20 +226,10 @@
   .ai-error { font-size: 12px; color: var(--red); padding: 8px 0; }
 
   /* Quick add */
-  .quick-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    margin-bottom: 10px;
-  }
+  .quick-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-bottom: 10px; }
   .quick-item {
-    padding: 8px 10px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: left;
+    padding: 8px 10px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; text-align: left;
   }
   .quick-item:hover { border-color: var(--text); }
   .quick-item:active { transform: scale(0.98); }
@@ -252,14 +240,9 @@
   .field-group { margin-bottom: 8px; }
   .field-label { font-size: 11px; color: var(--text-3); margin-bottom: 4px; display: block; font-family: 'DM Mono', monospace; }
   .field-input {
-    font-family: 'DM Sans', sans-serif;
-    width: 100%;
-    font-size: 13px;
-    border: 1px solid var(--border-med);
-    border-radius: var(--radius-sm);
-    padding: 8px 10px;
-    background: var(--surface);
-    color: var(--text);
+    font-family: 'DM Sans', sans-serif; width: 100%; font-size: 13px;
+    border: 1px solid var(--border-med); border-radius: var(--radius-sm);
+    padding: 8px 10px; background: var(--surface); color: var(--text);
   }
   .field-input:focus { outline: none; border-color: var(--text); }
   .field-input.narrow { max-width: 120px; }
@@ -267,62 +250,56 @@
   /* Panel actions */
   .panel-actions { display: flex; gap: 6px; justify-content: flex-end; margin-top: 10px; }
   .btn-cancel {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 6px 14px;
-    background: none;
-    color: var(--text-3);
-    cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px 14px; background: none; color: var(--text-3); cursor: pointer;
   }
   .btn-cancel:hover { color: var(--text); border-color: var(--border-med); }
   .btn-add {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1px solid var(--text);
-    border-radius: var(--radius-sm);
-    padding: 6px 16px;
-    background: var(--text);
-    color: #fff;
-    cursor: pointer;
-    transition: opacity 0.15s;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--text); border-radius: var(--radius-sm);
+    padding: 6px 16px; background: var(--text); color: #fff; cursor: pointer; transition: opacity 0.15s;
   }
   .btn-add:hover { opacity: 0.85; }
 
-  /* Totals */
-  .totals-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-top: 1.25rem;
-  }
-  .total-card {
+  /* Day-level symptom card */
+  .day-sym-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 10px 8px;
-    text-align: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
   }
+  .day-sym-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .day-sym-header-title { font-size: 13px; font-weight: 500; }
+  .day-sym-header-sub { font-size: 11px; color: var(--text-3); font-family: 'DM Mono', monospace; }
+  .day-sym-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; padding: 12px 14px; }
+  .day-sym-field { display: flex; flex-direction: column; gap: 4px; }
+  .day-sym-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text-3); }
+  .day-sym-select {
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    border: 1px solid var(--border-med); border-radius: var(--radius-sm);
+    padding: 7px 8px; background: var(--surface2); color: var(--text);
+    -webkit-appearance: none; appearance: none; cursor: pointer; width: 100%;
+  }
+  .day-sym-select:focus { outline: none; border-color: var(--text); background: var(--surface); }
+
+  /* Totals */
+  .totals-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 1.25rem; }
+  .total-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
   .total-label { font-size: 10px; color: var(--text-3); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
   .total-val { font-size: 19px; font-weight: 500; color: var(--text); font-family: 'DM Mono', monospace; letter-spacing: -0.03em; }
   .total-unit { font-size: 10px; color: var(--text-3); font-family: 'DM Mono', monospace; }
 
   /* Progress */
   .progress-wrap { margin-top: 1rem; }
-  .progress-track {
-    height: 5px;
-    background: var(--surface2);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--green);
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
+  .progress-track { height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.4s ease; }
   .progress-labels { display: flex; justify-content: space-between; margin-top: 5px; }
   .progress-label { font-size: 10px; color: var(--text-3); font-family: 'DM Mono', monospace; }
 
@@ -330,37 +307,21 @@
   .notes-section { margin-top: 1.25rem; }
   .notes-label { font-size: 11px; color: var(--text-3); font-family: 'DM Mono', monospace; margin-bottom: 6px; }
   .notes-input {
-    font-family: 'DM Sans', sans-serif;
-    width: 100%;
-    font-size: 13px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 10px 12px;
-    background: var(--surface);
-    color: var(--text);
-    resize: vertical;
-    min-height: 70px;
-    line-height: 1.6;
+    font-family: 'DM Sans', sans-serif; width: 100%; font-size: 13px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 10px 12px; background: var(--surface); color: var(--text);
+    resize: vertical; min-height: 70px; line-height: 1.6;
   }
   .notes-input:focus { outline: none; border-color: var(--border-med); }
   .notes-input::placeholder { color: var(--text-3); }
 
   /* Toast */
   .toast {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
+    position: fixed; bottom: 1.5rem; left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: var(--text);
-    color: #fff;
-    font-size: 13px;
-    padding: 10px 18px;
-    border-radius: 20px;
-    opacity: 0;
-    transition: all 0.25s;
-    pointer-events: none;
-    z-index: 100;
-    white-space: nowrap;
+    background: var(--text); color: #fff; font-size: 13px;
+    padding: 10px 18px; border-radius: 20px; opacity: 0;
+    transition: all 0.25s; pointer-events: none; z-index: 100; white-space: nowrap;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
@@ -370,6 +331,11 @@
 <div class="app-header">
   <div class="app-header-top">
     <div>
+      <div class="brand-line">
+        <span class="brand-badge">DCA</span>
+        <span class="brand-sep">+</span>
+        <span class="brand-badge">FM</span>
+      </div>
       <div class="app-title">4-Day Food Log</div>
       <div class="app-subtitle">track · log · review</div>
     </div>
@@ -379,12 +345,32 @@
 </div>
 
 <div class="content">
+
+  <div class="patient-card">
+    <div class="section-title">patient information</div>
+    <div class="patient-fields">
+      <div class="p-field">
+        <label>first name</label>
+        <input type="text" id="patFirst" placeholder="First name" oninput="savePatient()" />
+      </div>
+      <div class="p-field">
+        <label>last name</label>
+        <input type="text" id="patLast" placeholder="Last name" oninput="savePatient()" />
+      </div>
+      <div class="p-field full">
+        <label>email address</label>
+        <input type="email" id="patEmail" placeholder="patient@email.com" oninput="savePatient()" />
+      </div>
+    </div>
+  </div>
+
   <div id="logContent"></div>
   <div class="totals-grid" id="totalsGrid"></div>
   <div class="progress-wrap" id="progressWrap"></div>
+
   <div class="notes-section">
     <div class="notes-label">notes for this day</div>
-    <textarea class="notes-input" id="notesInput" placeholder="How did you feel? Energy levels, cravings, digestion..." oninput="saveNote()"></textarea>
+    <textarea class="notes-input" id="notesInput" placeholder="How did you feel overall today? Energy, mood, digestion, sleep..." oninput="saveNote()"></textarea>
   </div>
 </div>
 
@@ -393,77 +379,86 @@
 <script>
 const CALORIE_GOAL = 2000;
 const DAY_LABELS = ['Friday','Saturday','Sunday','Monday'];
+const MEAL_NAMES = ['Breakfast','Lunch','Dinner','Snacks'];
+
+const ENERGY_OPTS    = ['','Great','Good','OK','Low','Crashed'];
+const DIGESTION_OPTS = ['','Normal','Bloated','Gassy','Cramping','Reflux','Constipated','Loose'];
+const MOOD_OPTS      = ['','Calm','Focused','Content','Anxious','Irritable','Foggy','Tired'];
+const SLEEP_OPTS     = ['','Great','Good','Fair','Poor','Very poor'];
 
 const QUICK_FOODS = [
-  {food:'Apple',qty:'1 medium',cals:95},
-  {food:'Banana',qty:'1 medium',cals:105},
-  {food:'Greek yogurt',qty:'1 cup',cals:130},
-  {food:'Scrambled eggs',qty:'2 large',cals:180},
-  {food:'Oatmeal',qty:'1 cup cooked',cals:150},
-  {food:'Whole wheat toast',qty:'1 slice',cals:80},
-  {food:'Chicken breast',qty:'4 oz grilled',cals:185},
-  {food:'Salmon',qty:'5 oz',cals:280},
-  {food:'Brown rice',qty:'½ cup',cals:110},
-  {food:'Sweet potato',qty:'1 medium',cals:103},
-  {food:'Broccoli',qty:'1 cup',cals:55},
-  {food:'Mixed greens',qty:'2 cups',cals:20},
-  {food:'Almonds',qty:'1 oz (23)',cals:164},
-  {food:'Peanut butter',qty:'2 tbsp',cals:190},
-  {food:'Protein shake',qty:'1 scoop',cals:120},
-  {food:'Orange juice',qty:'8 oz',cals:110},
+  {food:'Apple',qty:'1 medium',cals:95},{food:'Banana',qty:'1 medium',cals:105},
+  {food:'Greek yogurt',qty:'1 cup',cals:130},{food:'Scrambled eggs',qty:'2 large',cals:180},
+  {food:'Oatmeal',qty:'1 cup cooked',cals:150},{food:'Whole wheat toast',qty:'1 slice',cals:80},
+  {food:'Chicken breast',qty:'4 oz grilled',cals:185},{food:'Salmon',qty:'5 oz',cals:280},
+  {food:'Brown rice',qty:'½ cup',cals:110},{food:'Sweet potato',qty:'1 medium',cals:103},
+  {food:'Broccoli',qty:'1 cup',cals:55},{food:'Mixed greens',qty:'2 cups',cals:20},
+  {food:'Almonds',qty:'1 oz (23)',cals:164},{food:'Peanut butter',qty:'2 tbsp',cals:190},
+  {food:'Protein shake',qty:'1 scoop',cals:120},{food:'Orange juice',qty:'8 oz',cals:110},
 ];
 
 const defaultMeals = {
-  Breakfast:[
-    {food:'Oatmeal',qty:'1 cup cooked',cals:150},
-    {food:'Banana',qty:'1 medium',cals:105},
-    {food:'Black coffee',qty:'8 oz',cals:5}
-  ],
-  Lunch:[
-    {food:'Grilled chicken breast',qty:'4 oz',cals:185},
-    {food:'Brown rice',qty:'½ cup',cals:110},
-    {food:'Mixed greens',qty:'2 cups',cals:20}
-  ],
-  Dinner:[
-    {food:'Salmon fillet',qty:'5 oz',cals:280},
-    {food:'Sweet potato',qty:'1 medium',cals:103},
-    {food:'Broccoli',qty:'1 cup',cals:55}
-  ],
+  Breakfast:[{food:'Oatmeal',qty:'1 cup cooked',cals:150},{food:'Banana',qty:'1 medium',cals:105},{food:'Black coffee',qty:'8 oz',cals:5}],
+  Lunch:[{food:'Grilled chicken breast',qty:'4 oz',cals:185},{food:'Brown rice',qty:'½ cup',cals:110},{food:'Mixed greens',qty:'2 cups',cals:20}],
+  Dinner:[{food:'Salmon fillet',qty:'5 oz',cals:280},{food:'Sweet potato',qty:'1 medium',cals:103},{food:'Broccoli',qty:'1 cup',cals:55}],
   Snacks:[]
 };
 
+function emptySym() {
+  const s={};
+  MEAL_NAMES.forEach(m=>{s[m]={energy:'',digestion:'',mood:''};});
+  s._day={energy:'',digestion:'',mood:'',sleep:''};
+  return s;
+}
+
 function initData() {
-  const data = {};
-  for (let d=0;d<4;d++) {
-    data[d] = {meals:JSON.parse(JSON.stringify(defaultMeals)), notes:''};
-    if (d>0) Object.keys(data[d].meals).forEach(m=>{data[d].meals[m]=[];});
+  const data={};
+  for(let d=0;d<4;d++){
+    data[d]={meals:JSON.parse(JSON.stringify(defaultMeals)),symptoms:emptySym(),notes:''};
+    if(d>0) Object.keys(data[d].meals).forEach(m=>{data[d].meals[m]=[];});
   }
   return data;
 }
 
-const state = {
-  data: initData(),
-  activeDay: 0,
-  addingTo: null,
-  addMode: 'ai',
-  lookupResult: null,
-  lookupQuery: ''
+function getParam(n){return new URLSearchParams(window.location.search).get(n)||'';}
+
+const patient={
+  firstName:getParam('first')||getParam('firstName')||'',
+  lastName:getParam('last')||getParam('lastName')||'',
+  email:getParam('email')||''
 };
 
-function getCalTotal(d) { return Object.values(state.data[d].meals).flat().reduce((s,e)=>s+(Number(e.cals)||0),0); }
-function getMealCals(d,m) { return (state.data[d].meals[m]||[]).reduce((s,e)=>s+(Number(e.cals)||0),0); }
-function getMacros(d) { const t=getCalTotal(d); return {protein:Math.round(t*.25/4),carbs:Math.round(t*.45/4),fat:Math.round(t*.30/9)}; }
+const state={data:initData(),activeDay:0,addingTo:null,addMode:'ai',lookupResult:null,lookupQuery:''};
 
-function showToast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+function getCalTotal(d){return Object.values(state.data[d].meals).flat().reduce((s,e)=>s+(Number(e.cals)||0),0);}
+function getMealCals(d,m){return(state.data[d].meals[m]||[]).reduce((s,e)=>s+(Number(e.cals)||0),0);}
+function getMacros(d){const t=getCalTotal(d);return{protein:Math.round(t*.25/4),carbs:Math.round(t*.45/4),fat:Math.round(t*.30/9)};}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+function savePatient(){
+  patient.firstName=document.getElementById('patFirst').value;
+  patient.lastName=document.getElementById('patLast').value;
+  patient.email=document.getElementById('patEmail').value;
+}
+function saveNote(){state.data[state.activeDay].notes=document.getElementById('notesInput').value;}
+function saveMealSym(meal,field,val){state.data[state.activeDay].symptoms[meal][field]=val;}
+function saveDaySym(field,val){state.data[state.activeDay].symptoms._day[field]=val;}
+
+function render(){
+  renderTabs();renderLog();renderTotals();renderProgress();
+  document.getElementById('notesInput').value=state.data[state.activeDay].notes||'';
+  // pre-fill from URL params once
+  if(!document.getElementById('patFirst').dataset.filled){
+    document.getElementById('patFirst').value=patient.firstName;
+    document.getElementById('patLast').value=patient.lastName;
+    document.getElementById('patEmail').value=patient.email;
+    document.getElementById('patFirst').dataset.filled='1';
+  }
 }
 
-function render() { renderTabs(); renderLog(); renderTotals(); renderProgress(); document.getElementById('notesInput').value=state.data[state.activeDay].notes||''; }
-
-function renderTabs() {
-  const c=document.getElementById('dayTabs'); c.innerHTML='';
+function renderTabs(){
+  const c=document.getElementById('dayTabs');c.innerHTML='';
   DAY_LABELS.forEach((label,i)=>{
     const b=document.createElement('button');
     b.className='day-tab'+(i===state.activeDay?' active':'');
@@ -473,16 +468,31 @@ function renderTabs() {
   });
 }
 
-function renderLog() {
+function mkSelect(cls,opts,current,onchange){
+  const s=document.createElement('select');
+  s.className=cls+(current===''?' empty':'');
+  s.setAttribute('onchange',onchange);
+  opts.forEach(o=>{
+    const op=document.createElement('option');
+    op.value=o;op.textContent=o===''?'— select —':o;
+    if(o===current)op.selected=true;
+    s.appendChild(op);
+  });
+  return s;
+}
+
+function renderLog(){
   const d=state.activeDay;
-  const c=document.getElementById('logContent'); c.innerHTML='';
-  Object.keys(state.data[d].meals).forEach(mealName=>{
+  const c=document.getElementById('logContent');c.innerHTML='';
+  const syms=state.data[d].symptoms;
+
+  MEAL_NAMES.forEach(mealName=>{
     const entries=state.data[d].meals[mealName];
-    const sec=document.createElement('div'); sec.className='meal-section';
+    const sec=document.createElement('div');sec.className='meal-section';
+    const card=document.createElement('div');card.className='meal-card';
 
-    const card=document.createElement('div'); card.className='meal-card';
-
-    const hdr=document.createElement('div'); hdr.className='meal-header';
+    // header
+    const hdr=document.createElement('div');hdr.className='meal-header';
     hdr.innerHTML=`<span class="meal-name">${mealName}</span>
       <div style="display:flex;align-items:center">
         <span class="meal-kcal">${getMealCals(d,mealName)} kcal</span>
@@ -490,10 +500,11 @@ function renderLog() {
       </div>`;
     card.appendChild(hdr);
 
-    if (entries.length>0) {
-      const list=document.createElement('div'); list.className='entry-list';
+    // entries
+    if(entries.length>0){
+      const list=document.createElement('div');list.className='entry-list';
       entries.forEach((e,idx)=>{
-        const row=document.createElement('div'); row.className='entry-row';
+        const row=document.createElement('div');row.className='entry-row';
         row.innerHTML=`<div class="entry-info">
             <div class="entry-food">${e.food}</div>
             ${e.qty?`<div class="entry-qty">${e.qty}</div>`:''}
@@ -505,21 +516,34 @@ function renderLog() {
       card.appendChild(list);
     }
 
-    if (state.addingTo===mealName) {
-      const panel=document.createElement('div'); panel.className='add-panel';
+    // per-meal symptom row
+    const mSym=syms[mealName]||{energy:'',digestion:'',mood:''};
+    const symRow=document.createElement('div');symRow.className='symptom-row';
+    ['energy','digestion','mood'].forEach(field=>{
+      const f=document.createElement('div');f.className='sym-field';
+      const lbl=document.createElement('div');lbl.className='sym-label';
+      lbl.textContent=field==='energy'?'energy after':field;
+      const opts=field==='energy'?ENERGY_OPTS:field==='digestion'?DIGESTION_OPTS:MOOD_OPTS;
+      const sel=mkSelect('sym-select',opts,mSym[field]||'',`saveMealSym('${mealName}','${field}',this.value)`);
+      f.appendChild(lbl);f.appendChild(sel);
+      symRow.appendChild(f);
+    });
+    card.appendChild(symRow);
+
+    // add panel
+    if(state.addingTo===mealName){
+      const panel=document.createElement('div');panel.className='add-panel';
       panel.innerHTML=`<div class="mode-tabs">
         <button class="mode-tab${state.addMode==='ai'?' active':''}" onclick="setMode('ai')">AI estimate</button>
         <button class="mode-tab${state.addMode==='quick'?' active':''}" onclick="setMode('quick')">Quick add</button>
         <button class="mode-tab${state.addMode==='manual'?' active':''}" onclick="setMode('manual')">Manual</button>
-      </div>
-      <div class="add-body" id="addBody_${mealName}"></div>`;
+      </div><div class="add-body" id="addBody_${mealName}"></div>`;
       card.appendChild(panel);
-
       setTimeout(()=>{
         const body=document.getElementById('addBody_'+mealName);
-        if (!body) return;
-        if (state.addMode==='ai') renderAIMode(body,mealName);
-        else if (state.addMode==='quick') renderQuickMode(body,mealName);
+        if(!body)return;
+        if(state.addMode==='ai')renderAIMode(body,mealName);
+        else if(state.addMode==='quick')renderQuickMode(body,mealName);
         else renderManualMode(body,mealName);
       },10);
     }
@@ -527,9 +551,32 @@ function renderLog() {
     sec.appendChild(card);
     c.appendChild(sec);
   });
+
+  // Day-level symptom card
+  const ds=syms._day||{};
+  const dayCard=document.createElement('div');dayCard.className='day-sym-card';
+  const dayHdr=document.createElement('div');dayHdr.className='day-sym-header';
+  dayHdr.innerHTML=`<span class="day-sym-header-title">Overall — ${DAY_LABELS[d]}</span><span class="day-sym-header-sub">end of day</span>`;
+  dayCard.appendChild(dayHdr);
+
+  const grid=document.createElement('div');grid.className='day-sym-grid';
+  [
+    {field:'energy',label:'energy (overall)',opts:ENERGY_OPTS},
+    {field:'digestion',label:'digestion (overall)',opts:DIGESTION_OPTS},
+    {field:'mood',label:'mood (overall)',opts:MOOD_OPTS},
+    {field:'sleep',label:'sleep quality',opts:SLEEP_OPTS}
+  ].forEach(({field,label,opts})=>{
+    const f=document.createElement('div');f.className='day-sym-field';
+    const lbl=document.createElement('div');lbl.className='day-sym-label';lbl.textContent=label;
+    const sel=mkSelect('day-sym-select',opts,ds[field]||'',`saveDaySym('${field}',this.value)`);
+    f.appendChild(lbl);f.appendChild(sel);
+    grid.appendChild(f);
+  });
+  dayCard.appendChild(grid);
+  c.appendChild(dayCard);
 }
 
-function renderAIMode(body,mealName) {
+function renderAIMode(body,mealName){
   body.innerHTML=`<div class="ai-hint">Type a food and amount — AI will estimate the calories.</div>
     <div class="ai-row">
       <input class="ai-input" id="aiFood" type="text" placeholder="e.g. 1 cup pasta with marinara" value="${state.lookupQuery||''}" />
@@ -540,31 +587,26 @@ function renderAIMode(body,mealName) {
       <button class="btn-cancel" onclick="cancelAdd()">Cancel</button>
       <button class="btn-add" id="aiAddBtn" style="display:none" onclick="addFromAI('${mealName}')">Add item</button>
     </div>`;
-
-  if (state.lookupResult) showResult(state.lookupResult);
+  if(state.lookupResult)showResult(state.lookupResult);
   setTimeout(()=>{const el=document.getElementById('aiFood');if(el){el.focus();el.setSelectionRange(9999,9999);}},30);
   document.getElementById('aiFood').addEventListener('keydown',e=>{if(e.key==='Enter')doLookup(mealName);});
 }
 
-function renderQuickMode(body,mealName) {
-  const grid=document.createElement('div'); grid.className='quick-grid';
+function renderQuickMode(body,mealName){
+  const grid=document.createElement('div');grid.className='quick-grid';
   QUICK_FOODS.forEach(item=>{
-    const el=document.createElement('button'); el.className='quick-item';
+    const el=document.createElement('button');el.className='quick-item';
     el.innerHTML=`<div class="qi-name">${item.food}</div><div class="qi-detail">${item.qty} · ${item.cals} kcal</div>`;
-    el.onclick=()=>{
-      state.data[state.activeDay].meals[mealName].push({...item});
-      state.addingTo=null; state.lookupResult=null;
-      render(); showToast(item.food+' added');
-    };
+    el.onclick=()=>{state.data[state.activeDay].meals[mealName].push({...item});state.addingTo=null;state.lookupResult=null;render();showToast(item.food+' added');};
     grid.appendChild(el);
   });
   body.appendChild(grid);
-  const actions=document.createElement('div'); actions.className='panel-actions';
+  const actions=document.createElement('div');actions.className='panel-actions';
   actions.innerHTML=`<button class="btn-cancel" onclick="cancelAdd()">Cancel</button>`;
   body.appendChild(actions);
 }
 
-function renderManualMode(body,mealName) {
+function renderManualMode(body,mealName){
   body.innerHTML=`
     <div class="field-group"><label class="field-label">food name</label><input class="field-input" id="manFood" type="text" placeholder="e.g. Greek yogurt" /></div>
     <div class="field-group"><label class="field-label">amount</label><input class="field-input narrow" id="manQty" type="text" placeholder="e.g. 1 cup" /></div>
@@ -576,24 +618,19 @@ function renderManualMode(body,mealName) {
   setTimeout(()=>{const el=document.getElementById('manFood');if(el)el.focus();},30);
 }
 
-function setMode(mode) { state.addMode=mode; state.lookupResult=null; state.lookupQuery=''; renderLog(); }
+function setMode(mode){state.addMode=mode;state.lookupResult=null;state.lookupQuery='';renderLog();}
 
-async function doLookup(mealName) {
-  const input=document.getElementById('aiFood');
-  if (!input) return;
-  const query=input.value.trim();
-  if (!query) return;
-  state.lookupQuery=query;
-  state.lookupResult=null;
-
+async function doLookup(mealName){
+  const input=document.getElementById('aiFood');if(!input)return;
+  const query=input.value.trim();if(!query)return;
+  state.lookupQuery=query;state.lookupResult=null;
   const btn=document.getElementById('estimateBtn');
   const box=document.getElementById('aiResultBox');
   const addBtn=document.getElementById('aiAddBtn');
-  if (btn){btn.disabled=true;btn.textContent='Estimating...';}
-  if (box) box.innerHTML='';
-  if (addBtn) addBtn.style.display='none';
-
-  try {
+  if(btn){btn.disabled=true;btn.textContent='Estimating...';}
+  if(box)box.innerHTML='';
+  if(addBtn)addBtn.style.display='none';
+  try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -607,59 +644,49 @@ async function doLookup(mealName) {
     const data=await res.json();
     const text=data.content.find(b=>b.type==='text')?.text||'';
     const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
-    state.lookupResult=parsed;
-    showResult(parsed);
-  } catch(e) {
+    state.lookupResult=parsed;showResult(parsed);
+  }catch(e){
     const box=document.getElementById('aiResultBox');
-    if (box) box.innerHTML=`<div class="ai-error">Could not estimate — try manual entry.</div>`;
+    if(box)box.innerHTML=`<div class="ai-error">Could not estimate — try manual entry.</div>`;
   }
-  if (btn){btn.disabled=false;btn.textContent='Estimate';}
+  if(btn){btn.disabled=false;btn.textContent='Estimate';}
 }
 
-function showResult(parsed) {
+function showResult(parsed){
   const box=document.getElementById('aiResultBox');
   const addBtn=document.getElementById('aiAddBtn');
-  if (box) box.innerHTML=`<div class="ai-result">
+  if(box)box.innerHTML=`<div class="ai-result">
     <div class="ai-result-food">${parsed.food}</div>
     <div class="ai-result-detail">${parsed.qty}</div>
     <div class="ai-result-cals">${parsed.cals} <span style="font-size:12px">kcal</span></div>
     <div class="ai-result-note">AI estimate</div>
   </div>`;
-  if (addBtn) addBtn.style.display='inline-block';
+  if(addBtn)addBtn.style.display='inline-block';
 }
 
-function addFromAI(mealName) {
-  if (!state.lookupResult) return;
+function addFromAI(mealName){
+  if(!state.lookupResult)return;
   state.data[state.activeDay].meals[mealName].push({...state.lookupResult});
   const name=state.lookupResult.food;
-  state.addingTo=null; state.lookupResult=null; state.lookupQuery='';
-  render(); showToast(name+' added');
+  state.addingTo=null;state.lookupResult=null;state.lookupQuery='';
+  render();showToast(name+' added');
 }
 
-function addManual(mealName) {
+function addManual(mealName){
   const food=document.getElementById('manFood').value.trim();
   const qty=document.getElementById('manQty').value.trim();
   const cals=parseInt(document.getElementById('manCals').value)||0;
-  if (!food) return;
+  if(!food)return;
   state.data[state.activeDay].meals[mealName].push({food,qty,cals});
-  state.addingTo=null; render(); showToast(food+' added');
+  state.addingTo=null;render();showToast(food+' added');
 }
 
-function toggleAdd(meal) {
-  state.addingTo=state.addingTo===meal?null:meal;
-  state.lookupResult=null; state.lookupQuery='';
-  renderLog();
-}
-function cancelAdd() { state.addingTo=null; state.lookupResult=null; renderLog(); }
-function deleteEntry(d,meal,idx) {
-  const name=state.data[d].meals[meal][idx].food;
-  state.data[d].meals[meal].splice(idx,1);
-  render(); showToast(name+' removed');
-}
-function saveNote() { state.data[state.activeDay].notes=document.getElementById('notesInput').value; }
+function toggleAdd(meal){state.addingTo=state.addingTo===meal?null:meal;state.lookupResult=null;state.lookupQuery='';renderLog();}
+function cancelAdd(){state.addingTo=null;state.lookupResult=null;renderLog();}
+function deleteEntry(d,meal,idx){const name=state.data[d].meals[meal][idx].food;state.data[d].meals[meal].splice(idx,1);render();showToast(name+' removed');}
 
-function renderTotals() {
-  const d=state.activeDay; const t=getCalTotal(d); const m=getMacros(d);
+function renderTotals(){
+  const d=state.activeDay;const t=getCalTotal(d);const m=getMacros(d);
   document.getElementById('totalsGrid').innerHTML=`
     <div class="total-card"><div class="total-label">calories</div><div class="total-val">${t}</div><div class="total-unit">kcal</div></div>
     <div class="total-card"><div class="total-label">protein</div><div class="total-val">${m.protein}</div><div class="total-unit">g est.</div></div>
@@ -667,7 +694,7 @@ function renderTotals() {
     <div class="total-card"><div class="total-label">fat</div><div class="total-val">${m.fat}</div><div class="total-unit">g est.</div></div>`;
 }
 
-function renderProgress() {
+function renderProgress(){
   const t=getCalTotal(state.activeDay);
   const pct=Math.min(100,Math.round((t/CALORIE_GOAL)*100));
   document.getElementById('progressWrap').innerHTML=`
@@ -679,24 +706,46 @@ function renderProgress() {
     </div>`;
 }
 
-function exportSummary() {
-  let lines=['4-Day Food Log Summary',''];
+function exportSummary(){
+  const fn=document.getElementById('patFirst').value||patient.firstName;
+  const ln=document.getElementById('patLast').value||patient.lastName;
+  const em=document.getElementById('patEmail').value||patient.email;
+  const pName=[fn,ln].filter(Boolean).join(' ')||'Patient';
+
+  let lines=['DCA + FM — 4-Day Food Log Summary',''];
+  lines.push('Patient: '+pName+(em?' <'+em+'>':''));
+  lines.push('');
+
   DAY_LABELS.forEach((label,d)=>{
-    lines.push(label+' — '+getCalTotal(d)+' kcal');
-    Object.keys(state.data[d].meals).forEach(m=>{
+    lines.push('=== '+label+' — '+getCalTotal(d)+' kcal ===');
+    MEAL_NAMES.forEach(m=>{
       const entries=state.data[d].meals[m];
-      if (entries.length){
+      const s=state.data[d].symptoms[m]||{};
+      if(entries.length){
         lines.push('  '+m+':');
         entries.forEach(e=>lines.push('    • '+e.food+(e.qty?' ('+e.qty+')':'')+' — '+e.cals+' kcal'));
+        const sp=[];
+        if(s.energy)sp.push('Energy: '+s.energy);
+        if(s.digestion)sp.push('Digestion: '+s.digestion);
+        if(s.mood)sp.push('Mood: '+s.mood);
+        if(sp.length)lines.push('    Symptoms: '+sp.join(' | '));
       }
     });
-    if (state.data[d].notes) lines.push('  Notes: '+state.data[d].notes);
+    const ds=state.data[d].symptoms._day||{};
+    const dp=[];
+    if(ds.energy)dp.push('Energy: '+ds.energy);
+    if(ds.digestion)dp.push('Digestion: '+ds.digestion);
+    if(ds.mood)dp.push('Mood: '+ds.mood);
+    if(ds.sleep)dp.push('Sleep: '+ds.sleep);
+    if(dp.length)lines.push('  Overall: '+dp.join(' | '));
+    if(state.data[d].notes)lines.push('  Notes: '+state.data[d].notes);
     lines.push('');
   });
+
   const blob=new Blob([lines.join('\n')],{type:'text/plain'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download='food-log-summary.txt';
+  a.download=(pName.replace(/\s+/g,'_')||'patient')+'_food_log.txt';
   a.click();
   showToast('Summary downloaded');
 }
